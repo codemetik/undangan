@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>SMK Satya Praja 2 Petarukan · TA 2026/2027</title>
+    <!-- Font & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <style>
+        /* ----- RESET & BASE ----- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background: #f9f3ff;
+            min-height: 100vh;
+            padding-bottom: 90px;
+            /* space for fixed bottom nav */
+            overflow-x: hidden;
+        }
+
+        /* ----- VARIABLES (ungu + pink + warna-warni) ----- */
+        :root {
+            --ungu: #7c3aed;
+            --ungu-muda: #a78bfa;
+            --ungu-sangat-muda: #ede9fe;
+            --pink: #ec4899;
+            --pink-muda: #f472b6;
+            --pink-sangat-muda: #fce7f3;
+            --gold: #f59e0b;
+            --hijau: #10b981;
+            --biru: #3b82f6;
+            --merah: #ef4444;
+            --orange: #f97316;
+            --teal: #14b8a6;
+            --card-shadow: 0 12px 32px rgba(124, 58, 237, 0.18);
+            --nav-bg: rgba(255, 255, 255, 0.88);
+            --glass-border: rgba(124, 58, 237, 0.20);
+        }
+
+        /* ----- PAGE CONTAINER (setiap halaman) ----- */
+        .page {
+            display: none;
+            /* hidden by default, di-show via JS */
+            padding: 20px 18px 30px;
+            max-width: 500px;
+            margin: 0 auto;
+            animation: fadeSlideUp 0.55s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        /* animasi transisi seperti undangan digital */
+        @keyframes fadeSlideUp {
+            0% {
+                opacity: 0;
+                transform: translateY(32px) scale(0.96);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        /* ----- HEADER / JUDUL HALAMAN ----- */
+        .page-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 22px;
+        }
+
+        .page-header .icon-circle {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--ungu), var(--pink));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 22px;
+            box-shadow: 0 6px 16px rgba(124, 58, 237, 0.35);
+        }
+
+        .page-header h2 {
+            font-size: 22px;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--ungu), var(--pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.3px;
+        }
+
+        .page-header .badge-year {
+            margin-left: auto;
+            background: linear-gradient(135deg, var(--gold), var(--orange));
+            color: #fff;
+            font-weight: 700;
+            font-size: 12px;
+            padding: 4px 14px;
+            border-radius: 30px;
+            box-shadow: 0 4px 10px rgba(245, 158, 11, 0.35);
+            letter-spacing: 0.5px;
+        }
+
+        /* ----- KARTU / CARD (warna-warni) ----- */
+        .card {
+            background: #ffffff;
+            border-radius: 28px;
+            padding: 20px 20px 22px;
+            margin-bottom: 20px;
+            box-shadow: var(--card-shadow);
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(2px);
+            transition: transform 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+        }
+
+        .card-rainbow {
+            border-left: 6px solid var(--ungu);
+            border-right: 6px solid var(--pink);
+        }
+
+        .card-warna {
+            background: linear-gradient(145deg, #ffffff, #faf5ff);
+        }
+
+        /* ----- KOMPONEN WARNA-WARNI (label, chip, badge) ----- */
+        .chip {
+            display: inline-block;
+            padding: 6px 16px;
+            border-radius: 40px;
+            font-weight: 700;
+            font-size: 13px;
+            letter-spacing: 0.3px;
+            margin: 4px 6px 4px 0;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.06);
+        }
+
+        .chip-ungu {
+            background: var(--ungu-sangat-muda);
+            color: var(--ungu);
+        }
+        .chip-pink {
+            background: var(--pink-sangat-muda);
+            color: var(--pink);
+        }
+        .chip-gold {
+            background: #fef3c7;
+            color: #b45309;
+        }
+        .chip-hijau {
+            background: #d1fae5;
+            color: #065f46;
+        }
+        .chip-biru {
+            background: #dbeafe;
+            color: #1e40af;
+        }
+        .chip-merah {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+        .chip-teal {
+            background: #ccfbf1;
+            color: #0f766e;
+        }
+
+        .label-warna {
+            font-weight: 700;
+            font-size: 14px;
+            padding: 2px 0;
+        }
+        .label-warna i {
+            margin-right: 8px;
+            width: 20px;
+        }
+
+        /* ----- GRID / DAFTAR ----- */
+        .grid-dua {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+        }
+
+        .item-keahlian {
+            background: white;
+            border-radius: 20px;
+            padding: 16px 12px;
+            text-align: center;
+            box-shadow: 0 6px 18px rgba(124, 58, 237, 0.10);
+            border: 1px solid rgba(124, 58, 237, 0.08);
+            transition: all 0.2s;
+        }
+
+        .item-keahlian .icon-big {
+            font-size: 32px;
+            margin-bottom: 6px;
+            display: block;
+        }
+        .item-keahlian h4 {
+            font-size: 15px;
+            font-weight: 700;
+            color: #1e1b2e;
+        }
+        .item-keahlian p {
+            font-size: 12px;
+            color: #6b6b80;
+            margin-top: 2px;
+        }
+
+        .item-keahlian:nth-child(1) .icon-big {
+            color: var(--ungu);
+        }
+        .item-keahlian:nth-child(2) .icon-big {
+            color: var(--pink);
+        }
+        .item-keahlian:nth-child(3) .icon-big {
+            color: var(--gold);
+        }
+        .item-keahlian:nth-child(4) .icon-big {
+            color: var(--hijau);
+        }
+        .item-keahlian:nth-child(5) .icon-big {
+            color: var(--biru);
+        }
+        .item-keahlian:nth-child(6) .icon-big {
+            color: var(--orange);
+        }
+
+        /* ----- GALERI (warna-warni) ----- */
+        .galeri-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+        }
+
+        .galeri-item {
+            aspect-ratio: 1/1;
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            font-weight: 700;
+            color: #fff;
+            text-shadow: 0 2px 12px rgba(0, 0, 0, 0.20);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+            transition: transform 0.2s;
+        }
+
+        .galeri-item:hover {
+            transform: scale(1.02);
+        }
+
+        .galeri-item:nth-child(1) {
+            background: linear-gradient(135deg, var(--ungu), var(--pink));
+        }
+        .galeri-item:nth-child(2) {
+            background: linear-gradient(135deg, var(--gold), var(--orange));
+        }
+        .galeri-item:nth-child(3) {
+            background: linear-gradient(135deg, var(--hijau), var(--teal));
+        }
+        .galeri-item:nth-child(4) {
+            background: linear-gradient(135deg, var(--biru), var(--ungu-muda));
+        }
+        .galeri-item:nth-child(5) {
+            background: linear-gradient(135deg, var(--pink), var(--merah));
+        }
+        .galeri-item:nth-child(6) {
+            background: linear-gradient(135deg, var(--teal), var(--biru));
+        }
+
+        /* ----- KONTAK ----- */
+        .kontak-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .kontak-item {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            background: white;
+            padding: 14px 18px;
+            border-radius: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+            border: 1px solid rgba(124, 58, 237, 0.08);
+        }
+
+        .kontak-item .icon-box {
+            width: 44px;
+            height: 44px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            color: #fff;
+        }
+
+        .kontak-item .icon-box.ungu {
+            background: var(--ungu);
+        }
+        .kontak-item .icon-box.pink {
+            background: var(--pink);
+        }
+        .kontak-item .icon-box.gold {
+            background: var(--gold);
+        }
+        .kontak-item .icon-box.hijau {
+            background: var(--hijau);
+        }
+        .kontak-item .icon-box.biru {
+            background: var(--biru);
+        }
+
+        .kontak-item .info {
+            flex: 1;
+        }
+        .kontak-item .info .label {
+            font-size: 12px;
+            font-weight: 600;
+            color: #8b8ba3;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .kontak-item .info .value {
+            font-weight: 700;
+            color: #1e1b2e;
+            font-size: 16px;
+        }
+
+        /* ----- BOTTOM NAVIGATION (fixed) ----- */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: var(--nav-bg);
+            backdrop-filter: blur(18px) saturate(180%);
+            -webkit-backdrop-filter: blur(18px) saturate(180%);
+            border-top: 1px solid rgba(124, 58, 237, 0.15);
+            box-shadow: 0 -8px 30px rgba(124, 58, 237, 0.10);
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 8px 4px 12px;
+            z-index: 999;
+            border-radius: 30px 30px 0 0;
+            max-width: 500px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .bottom-nav .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: transparent;
+            border: none;
+            padding: 4px 10px;
+            cursor: pointer;
+            color: #a09bb8;
+            font-size: 11px;
+            font-weight: 600;
+            transition: all 0.25s;
+            position: relative;
+            border-radius: 20px;
+            min-width: 56px;
+        }
+
+        .bottom-nav .nav-item i {
+            font-size: 22px;
+            margin-bottom: 2px;
+            transition: all 0.25s;
+        }
+
+        .bottom-nav .nav-item span {
+            font-size: 10px;
+            letter-spacing: 0.2px;
+        }
+
+        .bottom-nav .nav-item.active {
+            color: var(--ungu);
+        }
+
+        .bottom-nav .nav-item.active i {
+            transform: translateY(-4px) scale(1.12);
+            color: var(--ungu);
+            text-shadow: 0 4px 12px rgba(124, 58, 237, 0.30);
+        }
+
+        .bottom-nav .nav-item.active::after {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 28px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--ungu), var(--pink));
+            border-radius: 10px;
+        }
+
+        .bottom-nav .nav-item:hover {
+            color: var(--ungu);
+        }
+
+        /* ----- ELEMEN HIAS (warna-warni) ----- */
+        .rainbow-line {
+            height: 4px;
+            width: 100%;
+            background: linear-gradient(90deg, var(--ungu), var(--pink), var(--gold), var(--hijau), var(--biru), var(--ungu));
+            border-radius: 10px;
+            margin: 18px 0 10px;
+            background-size: 300% 100%;
+            animation: rainbowMove 6s linear infinite;
+        }
+
+        @keyframes rainbowMove {
+            0% {
+                background-position: 0% 0%;
+            }
+            100% {
+                background-position: 300% 0%;
+            }
+        }
+
+        .sparkle-text {
+            background: linear-gradient(135deg, var(--ungu), var(--pink), var(--gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 800;
+        }
+
+        /* ----- RESPONSIVE ----- */
+        @media (max-width: 420px) {
+            .page {
+                padding: 16px 14px 20px;
+            }
+            .bottom-nav .nav-item {
+                min-width: 44px;
+                padding: 2px 6px;
+            }
+            .bottom-nav .nav-item i {
+                font-size: 18px;
+            }
+            .bottom-nav .nav-item span {
+                font-size: 9px;
+            }
+            .grid-dua {
+                gap: 10px;
+            }
+            .galeri-grid {
+                gap: 8px;
+            }
+            .page-header h2 {
+                font-size: 19px;
+            }
+        }
+
+        /* ----- TOMBOL / EFEK LAIN ----- */
+        .btn-cta {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--ungu), var(--pink));
+            color: #fff;
+            font-weight: 700;
+            padding: 12px 28px;
+            border-radius: 40px;
+            border: none;
+            box-shadow: 0 8px 24px rgba(124, 58, 237, 0.30);
+            font-size: 15px;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+
+        .btn-cta:hover {
+            transform: scale(1.03);
+            box-shadow: 0 10px 32px rgba(124, 58, 237, 0.40);
+        }
+
+        /* ----- TANDA TANGAN / FOOTER HALAMAN ----- */
+        .footer-note {
+            text-align: center;
+            font-size: 12px;
+            color: #a09bb8;
+            margin-top: 24px;
+            padding-top: 12px;
+            border-top: 1px dashed rgba(124, 58, 237, 0.15);
+        }
+
+        .footer-note i {
+            color: var(--pink);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===================== HALAMAN 1 : BERANDA ===================== -->
+    <div id="page-beranda" class="page active">
+        <div class="page-header">
+            <div class="icon-circle"><i class="fas fa-graduation-cap"></i></div>
+            <h2>SMK Satya Praja 2</h2>
+            <span class="badge-year">TA 2026/2027</span>
+        </div>
+
+        <div class="card card-rainbow" style="background: linear-gradient(145deg, #faf5ff, #fff5f9);">
+            <div style="display:flex; align-items:center; gap:12px; margin-bottom:10px;">
+                <span style="font-size:40px;">🎉</span>
+                <div>
+                    <h3 style="font-size:20px; font-weight:800; color:#1e1b2e;">Selamat Tahun Ajaran Baru!</h3>
+                    <p style="color:#6b6b80; font-weight:600;">2026/2027 · Semangat Belajar!</p>
+                </div>
+            </div>
+            <div class="rainbow-line"></div>
+            <p style="margin-top:12px; color:#3d3a4f; font-weight:600; line-height:1.6;">
+                <i class="fas fa-quote-left" style="color:var(--ungu); opacity:0.5;"></i>
+                Membangun generasi <span class="sparkle-text">berkarakter, kreatif, dan kompeten</span>
+                menyongsong masa depan cerah.
+                <i class="fas fa-quote-right" style="color:var(--pink); opacity:0.5;"></i>
+            </p>
+            <div style="display:flex; flex-wrap:wrap; gap:8px; margin-top:14px;">
+                <span class="chip chip-ungu"><i class="fas fa-star"></i> Unggul</span>
+                <span class="chip chip-pink"><i class="fas fa-heart"></i> Berkarakter</span>
+                <span class="chip chip-gold"><i class="fas fa-award"></i> Berprestasi</span>
+                <span class="chip chip-hijau"><i class="fas fa-leaf"></i> Inovatif</span>
+            </div>
+        </div>
+
+        <div style="display:flex; gap:12px; flex-wrap:wrap; margin-bottom:16px;">
+            <div class="card" style="flex:1; min-width:120px; text-align:center; padding:16px 10px;">
+                <div style="font-size:32px; color:var(--ungu);">👩‍🏫</div>
+                <div style="font-weight:700; font-size:18px; color:#1e1b2e;">48</div>
+                <div style="font-size:12px; color:#8b8ba3;">Guru</div>
+            </div>
+            <div class="card" style="flex:1; min-width:120px; text-align:center; padding:16px 10px;">
+                <div style="font-size:32px; color:var(--pink);">🧑‍🎓</div>
+                <div style="font-weight:700; font-size:18px; color:#1e1b2e;">720+</div>
+                <div style="font-size:12px; color:#8b8ba3;">Siswa</div>
+            </div>
+            <div class="card" style="flex:1; min-width:120px; text-align:center; padding:16px 10px;">
+                <div style="font-size:32px; color:var(--gold);">🏆</div>
+                <div style="font-weight:700; font-size:18px; color:#1e1b2e;">32</div>
+                <div style="font-size:12px; color:#8b8ba3;">Prestasi</div>
+            </div>
+        </div>
+
+        <div class="card" style="background:linear-gradient(135deg, var(--ungu-sangat-muda), var(--pink-sangat-muda)); border:1px solid rgba(124,58,237,0.15);">
+            <p style="font-weight:700; color:#1e1b2e; display:flex; align-items:center; gap:8px;">
+                <i class="fas fa-calendar-alt" style="color:var(--ungu);"></i>
+                Kalender Akademik 2026/2027
+            </p>
+            <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:8px;">
+                <span class="chip chip-ungu"><i class="far fa-calendar-check"></i> 15 Jul · Awal Masuk</span>
+                <span class="chip chip-pink"><i class="far fa-calendar-check"></i> 17 Agt · HUT RI</span>
+                <span class="chip chip-gold"><i class="far fa-calendar-check"></i> 20-24 Des · Libur</span>
+            </div>
+        </div>
+
+        <div class="footer-note">
+            <i class="fas fa-arrow-up"></i> Geser untuk jelajahi
+        </div>
+    </div>
+
+    <!-- ===================== HALAMAN 2 : TENTANG ===================== -->
+    <div id="page-tentang" class="page">
+        <div class="page-header">
+            <div class="icon-circle"><i class="fas fa-building-columns"></i></div>
+            <h2>Tentang Sekolah</h2>
+            <span class="badge-year">2026/2027</span>
+        </div>
+
+        <div class="card">
+            <h4 style="color:var(--ungu); font-size:18px; margin-bottom:6px;"><i class="fas fa-flag"></i> Visi</h4>
+            <p style="font-weight:600; color:#2d2a40;">"Menjadi SMK unggul yang mencetak lulusan berkarakter, berdaya saing global, dan berwawasan lingkungan."</p>
+            <div style="margin:14px 0 8px; height:2px; background:linear-gradient(90deg,var(--ungu),var(--pink),var(--gold));"></div>
+            <h4 style="color:var(--pink); font-size:18px; margin-bottom:6px;"><i class="fas fa-bullseye"></i> Misi</h4>
+            <ul style="list-style:none; padding:0; font-size:14px; color:#3d3a4f; font-weight:500;">
+                <li style="padding:6px 0; border-bottom:1px dashed #f0ebf9;">✅ Menyelenggarakan pendidikan vokasi berbasis industri</li>
+                <li style="padding:6px 0; border-bottom:1px dashed #f0ebf9;">✅ Mengembangkan karakter religius & nasionalis</li>
+                <li style="padding:6px 0;">✅ Mewujudkan sekolah ramah anak dan inklusif</li>
+            </ul>
+        </div>
+
+        <div class="card" style="background:linear-gradient(145deg, #faf5ff, #fff5f9);">
+            <div style="display:flex; gap:12px; flex-wrap:wrap;">
+                <span class="chip chip-ungu"><i class="fas fa-school"></i> Akreditasi A</span>
+                <span class="chip chip-pink"><i class="fas fa-calendar"></i> Berdiri 1998</span>
+                <span class="chip chip-gold"><i class="fas fa-map-pin"></i> Petarukan</span>
+                <span class="chip chip-hijau"><i class="fas fa-globe"></i> Kurikulum Merdeka</span>
+            </div>
+            <p style="margin-top:14px; font-size:14px; color:#4a4660; line-height:1.7;">
+                <i class="fas fa-quote-left" style="color:var(--ungu); opacity:0.4; margin-right:4px;"></i>
+                SMK Satya Praja 2 Petarukan berkomitmen mencetak generasi <strong style="color:var(--ungu);">unggul</strong>
+                dan <strong style="color:var(--pink);">berdaya saing</strong> melalui pembelajaran berbasis proyek dan
+                penguatan karakter.
+            </p>
+        </div>
+        <div class="footer-note">
+            <i class="fas fa-heart" style="color:var(--pink);"></i> 27 tahun menginspirasi
+        </div>
+    </div>
+
+    <!-- ===================== HALAMAN 3 : PROGRAM ===================== -->
+    <div id="page-program" class="page">
+        <div class="page-header">
+            <div class="icon-circle"><i class="fas fa-laptop-code"></i></div>
+            <h2>Program Keahlian</h2>
+            <span class="badge-year">2026/2027</span>
+        </div>
+
+        <div class="grid-dua">
+            <div class="item-keahlian"><span class="icon-big">💻</span><h4>RPL</h4><p>Rekayasa Perangkat Lunak</p></div>
+            <div class="item-keahlian"><span class="icon-big">📡</span><h4>TKJ</h4><p>Teknik Komputer & Jaringan</p></div>
+            <div class="item-keahlian"><span class="icon-big">🎨</span><h4>DKV</h4><p>Desain Komunikasi Visual</p></div>
+            <div class="item-keahlian"><span class="icon-big">⚡</span><h4>TITL</h4><p>Teknik Instalasi Tenaga Listrik</p></div>
+            <div class="item-keahlian"><span class="icon-big">🧑‍🍳</span><h4>Tata Boga</h4><p>Pengolahan & Kuliner</p></div>
+            <div class="item-keahlian"><span class="icon-big">🛠️</span><h4>Mesin</h4><p>Teknik Pemesinan</p></div>
+        </div>
+
+        <div class="card" style="margin-top:6px;">
+            <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
+                <span class="chip chip-ungu"><i class="fas fa-user-graduate"></i> 6 Jurusan</span>
+                <span class="chip chip-pink"><i class="fas fa-chalkboard-user"></i> Guru kompeten</span>
+                <span class="chip chip-gold"><i class="fas fa-industry"></i> Link & Match</span>
+            </div>
+            <p style="margin-top:12px; font-size:13px; color:#4a4660;">
+                <i class="fas fa-check-circle" style="color:var(--hijau);"></i> Semua program terakreditasi dan
+                berkolaborasi dengan industri mitra.
+            </p>
+        </div>
+        <div class="footer-note">
+            <i class="fas fa-arrow-right"></i> Pilih jurusan sesuai minatmu
+        </div>
+    </div>
+
+    <!-- ===================== HALAMAN 4 : FASILITAS ===================== -->
+    <div id="page-fasilitas" class="page">
+        <div class="page-header">
+            <div class="icon-circle"><i class="fas fa-cubes"></i></div>
+            <h2>Fasilitas</h2>
+            <span class="badge-year">2026/2027</span>
+        </div>
+
+        <div class="card" style="background:linear-gradient(145deg, #faf5ff, #fff5f9);">
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+                <div style="background:white; border-radius:18px; padding:14px; text-align:center; box-shadow:0 4px 12px rgba(0,0,0,0.04);">
+                    <div style="font-size:28px; color:var(--ungu);">🏫</div>
+                    <div style="font-weight:700; font-size:14px;">Lab. Komputer</div>
+                </div>
+                <div style="background:white; border-radius:18px; padding:14px; text-align:center; box-shadow:0 4px 12px rgba(0,0,0,0.04);">
+                    <div style="font-size:28px; color:var(--pink);">📚</div>
+                    <div style="font-weight:700; font-size:14px;">Perpustakaan</div>
+                </div>
+                <div style="background:white; border-radius:18px; padding:14px; text-align:center; box-shadow:0 4px 12px rgba(0,0,0,0.04);">
+                    <div style="font-size:28px; color:var(--gold);">⚽</div>
+                    <div style="font-weight:700; font-size:14px;">Lapangan Olahraga</div>
+                </div>
+                <div style="background:white; border-radius:18px; padding:14px; text-align:center; box-shadow:0 4px 12px rgba(0,0,0,0.04);">
+                    <div style="font-size:28px; color:var(--hijau);">🧪</div>
+                    <div style="font-weight:700; font-size:14px;">Lab. Sains</div>
+                </div>
+                <div style="background:white; border-radius:18px; padding:14px; text-align:center; box-shadow:0 4px 12px rgba(0,0,0,0.04);">
+                    <div style="font-size:28px; color:var(--biru);">🎵</div>
+                    <div style="font-weight:700; font-size:14px;">Ruang Musik</div>
+                </div>
+                <div style="background:white; border-radius:18px; padding:14px; text-align:center; box-shadow:0 4px 12px rgba(0,0,0,0.04);">
+                    <div style="font-size:28px; color:var(--orange);">🖼️</div>
+                    <div style="font-weight:700; font-size:14px;">Galeri Seni</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card" style="border-left:6px solid var(--gold); border-right:6px solid var(--pink);">
+            <p style="font-weight:600; color:#2d2a40; display:flex; align-items:center; gap:10px;">
+                <i class="fas fa-wifi" style="color:var(--ungu);"></i> Wi-Fi kampus & ruang ber-AC
+            </p>
+            <p style="font-size:13px; color:#6b6b80; margin-top:4px;">
+                Fasilitas modern untuk mendukung pembelajaran abad 21.
+            </p>
+        </div>
+        <div class="footer-note">
+            <i class="fas fa-check"></i> Sarana lengkap & nyaman
+        </div>
+    </div>
+
+    <!-- ===================== HALAMAN 5 : GALERI ===================== -->
+    <div id="page-galeri" class="page">
+        <div class="page-header">
+            <div class="icon-circle"><i class="fas fa-images"></i></div>
+            <h2>Galeri</h2>
+            <span class="badge-year">2026/2027</span>
+        </div>
+
+        <div class="galeri-grid">
+            <div class="galeri-item">📸</div>
+            <div class="galeri-item">🎓</div>
+            <div class="galeri-item">🏅</div>
+            <div class="galeri-item">🎭</div>
+            <div class="galeri-item">🌿</div>
+            <div class="galeri-item">🤝</div>
+        </div>
+
+        <div class="card" style="text-align:center; background:linear-gradient(135deg, var(--ungu-sangat-muda), var(--pink-sangat-muda));">
+            <p style="font-weight:700; color:#1e1b2e;">
+                <i class="fas fa-camera" style="color:var(--ungu);"></i> Momen terbaik di SMK Satya Praja 2
+            </p>
+            <div style="display:flex; gap:8px; justify-content:center; margin-top:8px; flex-wrap:wrap;">
+                <span class="chip chip-ungu">#KelasKreatif</span>
+                <span class="chip chip-pink">#ProjectBased</span>
+                <span class="chip chip-gold">#Prestasi</span>
+            </div>
+        </div>
+        <div class="footer-note">
+            <i class="fas fa-camera-retro"></i> Kenangan indah 2026/2027
+        </div>
+    </div>
+
+    <!-- ===================== HALAMAN 6 : KONTAK ===================== -->
+    <div id="page-kontak" class="page">
+        <div class="page-header">
+            <div class="icon-circle"><i class="fas fa-phone"></i></div>
+            <h2>Kontak</h2>
+            <span class="badge-year">2026/2027</span>
+        </div>
+
+        <div class="kontak-list">
+            <div class="kontak-item">
+                <div class="icon-box ungu"><i class="fas fa-map-pin"></i></div>
+                <div class="info"><div class="label">Alamat</div><div class="value">Jl. Raya Petarukan No. 45, Pemalang</div></div>
+            </div>
+            <div class="kontak-item">
+                <div class="icon-box pink"><i class="fas fa-phone-alt"></i></div>
+                <div class="info"><div class="label">Telepon</div><div class="value">(0284) 1234567</div></div>
+            </div>
+            <div class="kontak-item">
+                <div class="icon-box gold"><i class="fas fa-envelope"></i></div>
+                <div class="info"><div class="label">Email</div><div class="value">info@smksatya2.sch.id</div></div>
+            </div>
+            <div class="kontak-item">
+                <div class="icon-box hijau"><i class="fab fa-instagram"></i></div>
+                <div class="info"><div class="label">Instagram</div><div class="value">@smksatya2_petarukan</div></div>
+            </div>
+            <div class="kontak-item">
+                <div class="icon-box biru"><i class="fab fa-youtube"></i></div>
+                <div class="info"><div class="label">YouTube</div><div class="value">SMK Satya Praja 2 Official</div></div>
+            </div>
+        </div>
+
+        <div class="card" style="text-align:center; background:linear-gradient(135deg, #faf5ff, #fff5f9);">
+            <p style="font-weight:700; color:#1e1b2e;">
+                <i class="fas fa-paper-plane" style="color:var(--pink);"></i> Siap membantu Anda!
+            </p>
+            <button class="btn-cta" style="margin-top:10px; font-size:14px; padding:10px 28px;">
+                <i class="fas fa-comment"></i> Hubungi Kami
+            </button>
+        </div>
+        <div class="footer-note">
+            <i class="fas fa-heart" style="color:var(--pink);"></i> Terima kasih kunjungannya
+        </div>
+    </div>
+
+    <!-- ===================== BOTTOM NAVIGATION (FIXED) ===================== -->
+    <nav class="bottom-nav" id="bottomNav">
+        <button class="nav-item active" data-page="page-beranda">
+            <i class="fas fa-home"></i>
+            <span>Beranda</span>
+        </button>
+        <button class="nav-item" data-page="page-tentang">
+            <i class="fas fa-info-circle"></i>
+            <span>Tentang</span>
+        </button>
+        <button class="nav-item" data-page="page-program">
+            <i class="fas fa-laptop-code"></i>
+            <span>Program</span>
+        </button>
+        <button class="nav-item" data-page="page-fasilitas">
+            <i class="fas fa-cubes"></i>
+            <span>Fasilitas</span>
+        </button>
+        <button class="nav-item" data-page="page-galeri">
+            <i class="fas fa-images"></i>
+            <span>Galeri</span>
+        </button>
+        <button class="nav-item" data-page="page-kontak">
+            <i class="fas fa-phone"></i>
+            <span>Kontak</span>
+        </button>
+    </nav>
+
+    <!-- ===================== SCRIPT ===================== -->
+    <script>
+        (function() {
+            const navButtons = document.querySelectorAll('.nav-item');
+            const pages = document.querySelectorAll('.page');
+
+            // Fungsi untuk pindah halaman
+            function navigateTo(pageId) {
+                // Sembunyikan semua halaman
+                pages.forEach(p => p.classList.remove('active'));
+
+                // Tampilkan halaman target
+                const target = document.getElementById(pageId);
+                if (target) {
+                    target.classList.add('active');
+                }
+
+                // Update class active pada nav
+                navButtons.forEach(btn => {
+                    btn.classList.remove('active');
+                    if (btn.dataset.page === pageId) {
+                        btn.classList.add('active');
+                    }
+                });
+
+                // Scroll ke atas (opsional)
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+
+            // Event listener untuk tombol nav
+            navButtons.forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    const pageId = this.dataset.page;
+                    if (pageId) {
+                        navigateTo(pageId);
+                    }
+                });
+            });
+
+            // Navigasi via hash (jika ada)
+            window.addEventListener('hashchange', function() {
+                const hash = location.hash.replace('#', '');
+                if (hash) {
+                    const targetPage = document.getElementById(hash);
+                    if (targetPage) {
+                        navigateTo(hash);
+                    }
+                }
+            });
+
+            // Jika hash saat load
+            const initialHash = location.hash.replace('#', '');
+            if (initialHash) {
+                const targetPage = document.getElementById(initialHash);
+                if (targetPage) {
+                    navigateTo(initialHash);
+                }
+            } else {
+                // default: beranda
+                navigateTo('page-beranda');
+            }
+
+            // Opsional: sentuh / klik di luar untuk efek (tidak wajib)
+            console.log('🎓 SMK Satya Praja 2 Petarukan · TA 2026/2027');
+        })();
+    </script>
+</body>
+</html>
