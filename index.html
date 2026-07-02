@@ -26,7 +26,7 @@
             position: relative;
         }
 
-        /* ----- DEKORASI MENGGAMBUNG (seperti undangan) ----- */
+        /* ----- DEKORASI MENGGAMBUNG (sudut layar) ----- */
         .deco {
             position: fixed;
             font-size: 28px;
@@ -91,7 +91,7 @@
             }
         }
 
-        /* Tambahan confetti kecil (berkibar) */
+        /* ----- CONFETTI (di atas semua konten) ----- */
         .confetti-container {
             position: fixed;
             top: 0;
@@ -99,7 +99,7 @@
             width: 100%;
             height: 100%;
             pointer-events: none;
-            z-index: 0;
+            z-index: 9999;
             overflow: hidden;
         }
 
@@ -107,8 +107,7 @@
             position: absolute;
             width: 10px;
             height: 10px;
-            background: var(--ungu);
-            opacity: 0.25;
+            opacity: 0.3;
             border-radius: 2px;
             animation: confettiFall 10s linear infinite;
         }
@@ -220,28 +219,26 @@
 
         .page.active {
             display: block;
-            animation: fadePage 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+            animation: fadePage 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
         }
 
         @keyframes fadePage {
             0% {
                 opacity: 0;
-                transform: scale(0.94) translateY(20px);
-                filter: blur(2px);
+                transform: scale(0.96) translateY(16px);
             }
             100% {
                 opacity: 1;
                 transform: scale(1) translateY(0);
-                filter: blur(0);
             }
         }
 
         /* ----- ANIMASI KOMPONEN (transisi bertahap lebih halus) ----- */
         .animate-on-show {
             opacity: 0;
-            transform: translateY(30px) scale(0.96);
-            transition: opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1),
-                transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+            transform: translateY(24px) scale(0.97);
+            transition: opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
             will-change: transform, opacity;
         }
 
@@ -780,7 +777,7 @@
     <div class="deco deco-5"><i class="fas fa-sparkle"></i></div>
     <div class="deco deco-6"><i class="fas fa-crown"></i></div>
 
-    <!-- Confetti latar belakang -->
+    <!-- Confetti di atas semua konten -->
     <div class="confetti-container">
         <div class="confetti"></div>
         <div class="confetti"></div>
@@ -1199,11 +1196,11 @@
                     }
                 });
 
-                // Staggered animation dengan jeda lebih halus
+                // Animasi komponen bertahap dengan jeda lebih halus
                 const items = target.querySelectorAll('.animate-on-show');
                 items.forEach((el, index) => {
                     el.classList.remove('is-visible');
-                    const delay = 100 + (index * 70); // lebih smooth
+                    const delay = 80 + (index * 60);
                     setTimeout(() => {
                         el.classList.add('is-visible');
                     }, delay);
