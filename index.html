@@ -266,48 +266,99 @@
             color: var(--orange);
         }
 
-        /* ----- GALERI (warna-warni) ----- */
+        /* ----- GALERI INSTAGRAM STYLE (grid 3 kolom) ----- */
         .galeri-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 12px;
+            gap: 3px;
+            /* seperti spasi antar postingan IG */
+            background: #fff;
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 6px 20px rgba(124, 58, 237, 0.12);
+            border: 1px solid rgba(124, 58, 237, 0.08);
         }
 
         .galeri-item {
+            position: relative;
             aspect-ratio: 1/1;
-            border-radius: 18px;
+            background: #f0ebf9;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 28px;
+            font-size: 30px;
             font-weight: 700;
             color: #fff;
-            text-shadow: 0 2px 12px rgba(0, 0, 0, 0.20);
-            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
-            transition: transform 0.2s;
+            text-shadow: 0 2px 12px rgba(0, 0, 0, 0.25);
+            transition: transform 0.25s ease, filter 0.3s;
+            cursor: pointer;
+            overflow: hidden;
         }
 
         .galeri-item:hover {
-            transform: scale(1.02);
+            transform: scale(1.03);
+            filter: brightness(1.08);
+            z-index: 2;
         }
 
+        .galeri-item .overlay-ig {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 8px 6px;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.45));
+            display: flex;
+            justify-content: space-around;
+            color: #fff;
+            font-size: 12px;
+            font-weight: 600;
+            opacity: 0;
+            transition: opacity 0.3s;
+            backdrop-filter: blur(2px);
+        }
+
+        .galeri-item:hover .overlay-ig {
+            opacity: 1;
+        }
+
+        .galeri-item .overlay-ig span {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .galeri-item .overlay-ig i {
+            font-size: 13px;
+        }
+
+        /* Warna latar belakang masing-masing item (gradasi menarik) */
         .galeri-item:nth-child(1) {
-            background: linear-gradient(135deg, var(--ungu), var(--pink));
+            background: linear-gradient(135deg, #7c3aed, #a78bfa);
         }
         .galeri-item:nth-child(2) {
-            background: linear-gradient(135deg, var(--gold), var(--orange));
+            background: linear-gradient(135deg, #ec4899, #f472b6);
         }
         .galeri-item:nth-child(3) {
-            background: linear-gradient(135deg, var(--hijau), var(--teal));
+            background: linear-gradient(135deg, #f59e0b, #fbbf24);
         }
         .galeri-item:nth-child(4) {
-            background: linear-gradient(135deg, var(--biru), var(--ungu-muda));
+            background: linear-gradient(135deg, #10b981, #34d399);
         }
         .galeri-item:nth-child(5) {
-            background: linear-gradient(135deg, var(--pink), var(--merah));
+            background: linear-gradient(135deg, #3b82f6, #60a5fa);
         }
         .galeri-item:nth-child(6) {
-            background: linear-gradient(135deg, var(--teal), var(--biru));
+            background: linear-gradient(135deg, #ef4444, #f87171);
+        }
+        .galeri-item:nth-child(7) {
+            background: linear-gradient(135deg, #8b5cf6, #a78bfa);
+        }
+        .galeri-item:nth-child(8) {
+            background: linear-gradient(135deg, #f472b6, #fb7185);
+        }
+        .galeri-item:nth-child(9) {
+            background: linear-gradient(135deg, #14b8a6, #2dd4bf);
         }
 
         /* ----- KONTAK ----- */
@@ -533,11 +584,12 @@
             .grid-dua {
                 gap: 10px;
             }
-            .galeri-grid {
-                gap: 8px;
-            }
             .page-header h2 {
                 font-size: 19px;
+            }
+            .galeri-item .overlay-ig {
+                font-size: 10px;
+                padding: 4px 3px;
             }
         }
     </style>
@@ -658,7 +710,6 @@
         </div>
 
         <div class="grid-dua">
-            <!-- Masing-masing kartu jurusan adalah LINK ke halaman lain -->
             <div class="item-keahlian animate-on-show" data-target-page="page-fasilitas">
                 <span class="icon-big">💻</span>
                 <h4>RPL</h4>
@@ -763,7 +814,7 @@
         </div>
     </div>
 
-    <!-- ===================== HALAMAN 5 : GALERI ===================== -->
+    <!-- ===================== HALAMAN 5 : GALERI (Instagram Style) ===================== -->
     <div id="page-galeri" class="page">
         <div class="page-header animate-on-show">
             <div class="icon-circle"><i class="fas fa-images"></i></div>
@@ -771,27 +822,92 @@
             <span class="badge-year">2026/2027</span>
         </div>
 
-        <div class="galeri-grid">
-            <div class="galeri-item animate-on-show">📸</div>
-            <div class="galeri-item animate-on-show">🎓</div>
-            <div class="galeri-item animate-on-show">🏅</div>
-            <div class="galeri-item animate-on-show">🎭</div>
-            <div class="galeri-item animate-on-show">🌿</div>
-            <div class="galeri-item animate-on-show">🤝</div>
+        <!-- Grid 3 kolom seperti feed Instagram -->
+        <div class="galeri-grid animate-on-show">
+            <!-- 9 item dengan overlay gaya IG -->
+            <div class="galeri-item">
+                <span>📸</span>
+                <div class="overlay-ig">
+                    <span><i class="fas fa-heart"></i> 124</span>
+                    <span><i class="fas fa-comment"></i> 18</span>
+                </div>
+            </div>
+            <div class="galeri-item">
+                <span>🎓</span>
+                <div class="overlay-ig">
+                    <span><i class="fas fa-heart"></i> 89</span>
+                    <span><i class="fas fa-comment"></i> 7</span>
+                </div>
+            </div>
+            <div class="galeri-item">
+                <span>🏅</span>
+                <div class="overlay-ig">
+                    <span><i class="fas fa-heart"></i> 203</span>
+                    <span><i class="fas fa-comment"></i> 24</span>
+                </div>
+            </div>
+            <div class="galeri-item">
+                <span>🎭</span>
+                <div class="overlay-ig">
+                    <span><i class="fas fa-heart"></i> 67</span>
+                    <span><i class="fas fa-comment"></i> 5</span>
+                </div>
+            </div>
+            <div class="galeri-item">
+                <span>🌿</span>
+                <div class="overlay-ig">
+                    <span><i class="fas fa-heart"></i> 156</span>
+                    <span><i class="fas fa-comment"></i> 13</span>
+                </div>
+            </div>
+            <div class="galeri-item">
+                <span>🤝</span>
+                <div class="overlay-ig">
+                    <span><i class="fas fa-heart"></i> 92</span>
+                    <span><i class="fas fa-comment"></i> 9</span>
+                </div>
+            </div>
+            <div class="galeri-item">
+                <span>🎨</span>
+                <div class="overlay-ig">
+                    <span><i class="fas fa-heart"></i> 178</span>
+                    <span><i class="fas fa-comment"></i> 21</span>
+                </div>
+            </div>
+            <div class="galeri-item">
+                <span>⚡</span>
+                <div class="overlay-ig">
+                    <span><i class="fas fa-heart"></i> 134</span>
+                    <span><i class="fas fa-comment"></i> 11</span>
+                </div>
+            </div>
+            <div class="galeri-item">
+                <span>💻</span>
+                <div class="overlay-ig">
+                    <span><i class="fas fa-heart"></i> 210</span>
+                    <span><i class="fas fa-comment"></i> 28</span>
+                </div>
+            </div>
         </div>
 
-        <div class="card animate-on-show" style="text-align:center; background:linear-gradient(135deg, var(--ungu-sangat-muda), var(--pink-sangat-muda));">
-            <p style="font-weight:700; color:#1e1b2e;">
-                <i class="fas fa-camera" style="color:var(--ungu);"></i> Momen terbaik di SMK Satya Praja 2
+        <!-- Caption / deskripsi ala Instagram -->
+        <div class="card animate-on-show" style="text-align:center; background:linear-gradient(135deg, var(--ungu-sangat-muda), var(--pink-sangat-muda)); margin-top:16px;">
+            <p style="font-weight:700; color:#1e1b2e; display:flex; align-items:center; justify-content:center; gap:8px; flex-wrap:wrap;">
+                <i class="fas fa-camera" style="color:var(--ungu);"></i>
+                <span>#SMKSatyaPraja2</span>
+                <span style="color:var(--pink);">❤️</span>
+                <span>#TA2026/2027</span>
             </p>
             <div style="display:flex; gap:8px; justify-content:center; margin-top:8px; flex-wrap:wrap;">
                 <span class="chip chip-ungu">#KelasKreatif</span>
                 <span class="chip chip-pink">#ProjectBased</span>
                 <span class="chip chip-gold">#Prestasi</span>
+                <span class="chip chip-hijau">#SekolahHebat</span>
             </div>
         </div>
+
         <div class="footer-note animate-on-show">
-            <i class="fas fa-camera-retro"></i> Kenangan indah 2026/2027
+            <i class="fas fa-instagram" style="color:#e4405f;"></i> Follow @smksatya2_petarukan
         </div>
     </div>
 
@@ -873,18 +989,14 @@
             const navButtons = document.querySelectorAll('.nav-item');
             const pages = document.querySelectorAll('.page');
 
-            // Fungsi untuk pindah halaman dengan animasi komponen bertahap
             function navigateTo(pageId) {
-                // Sembunyikan semua halaman
                 pages.forEach(p => p.classList.remove('active'));
 
-                // Tampilkan halaman target
                 const target = document.getElementById(pageId);
                 if (!target) return;
 
                 target.classList.add('active');
 
-                // Update class active pada nav
                 navButtons.forEach(btn => {
                     btn.classList.remove('active');
                     if (btn.dataset.page === pageId) {
@@ -892,23 +1004,18 @@
                     }
                 });
 
-                // Trigger staggered animation untuk komponen di halaman target
                 const items = target.querySelectorAll('.animate-on-show');
                 items.forEach((el, index) => {
-                    // Reset terlebih dahulu
                     el.classList.remove('is-visible');
-                    // Staggered delay: 80ms per item, max delay 1s
                     const delay = 80 + (index * 80);
                     setTimeout(() => {
                         el.classList.add('is-visible');
                     }, delay);
                 });
 
-                // Scroll ke atas
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             }
 
-            // Event listener untuk tombol nav
             navButtons.forEach(btn => {
                 btn.addEventListener('click', function(e) {
                     const pageId = this.dataset.page;
@@ -918,7 +1025,6 @@
                 });
             });
 
-            // Event listener untuk kartu jurusan (program keahlian) sebagai link
             document.querySelectorAll('.item-keahlian[data-target-page]').forEach(el => {
                 el.addEventListener('click', function(e) {
                     const targetPage = this.dataset.targetPage;
@@ -928,7 +1034,6 @@
                 });
             });
 
-            // Navigasi via hash (jika ada)
             window.addEventListener('hashchange', function() {
                 const hash = location.hash.replace('#', '');
                 if (hash) {
@@ -939,7 +1044,6 @@
                 }
             });
 
-            // Inisialisasi: jika hash saat load
             const initialHash = location.hash.replace('#', '');
             if (initialHash) {
                 const targetPage = document.getElementById(initialHash);
@@ -949,7 +1053,6 @@
                     navigateTo('page-beranda');
                 }
             } else {
-                // default: beranda dengan animasi
                 navigateTo('page-beranda');
             }
 
