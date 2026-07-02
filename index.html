@@ -22,7 +22,6 @@
             background: #f9f3ff;
             min-height: 100vh;
             padding-bottom: 90px;
-            /* space for fixed bottom nav */
             overflow-x: hidden;
         }
 
@@ -48,27 +47,38 @@
         /* ----- PAGE CONTAINER (setiap halaman) ----- */
         .page {
             display: none;
-            /* hidden by default, di-show via JS */
             padding: 20px 18px 30px;
             max-width: 500px;
             margin: 0 auto;
-            animation: fadeSlideUp 0.55s cubic-bezier(0.23, 1, 0.32, 1);
         }
 
         .page.active {
             display: block;
+            animation: fadePage 0.6s cubic-bezier(0.23, 1, 0.32, 1);
         }
 
-        /* animasi transisi seperti undangan digital */
-        @keyframes fadeSlideUp {
+        @keyframes fadePage {
             0% {
                 opacity: 0;
-                transform: translateY(32px) scale(0.96);
+                transform: scale(0.97);
             }
             100% {
                 opacity: 1;
-                transform: translateY(0) scale(1);
+                transform: scale(1);
             }
+        }
+
+        /* ----- ANIMASI KOMPONEN (transisi bertahap) ----- */
+        .animate-on-show {
+            opacity: 0;
+            transform: translateY(24px) scale(0.96);
+            transition: opacity 0.5s cubic-bezier(0.23, 1, 0.32, 1),
+                transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .animate-on-show.is-visible {
+            opacity: 1;
+            transform: translateY(0) scale(1);
         }
 
         /* ----- HEADER / JUDUL HALAMAN ----- */
@@ -139,7 +149,7 @@
             background: linear-gradient(145deg, #ffffff, #faf5ff);
         }
 
-        /* ----- KOMPONEN WARNA-WARNI (label, chip, badge) ----- */
+        /* ----- CHIP & LABEL WARNA-WARNI ----- */
         .chip {
             display: inline-block;
             padding: 6px 16px;
@@ -180,17 +190,7 @@
             color: #0f766e;
         }
 
-        .label-warna {
-            font-weight: 700;
-            font-size: 14px;
-            padding: 2px 0;
-        }
-        .label-warna i {
-            margin-right: 8px;
-            width: 20px;
-        }
-
-        /* ----- GRID / DAFTAR ----- */
+        /* ----- GRID / DAFTAR JURUSAN (kartu klik) ----- */
         .grid-dua {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -204,7 +204,19 @@
             text-align: center;
             box-shadow: 0 6px 18px rgba(124, 58, 237, 0.10);
             border: 1px solid rgba(124, 58, 237, 0.08);
-            transition: all 0.2s;
+            transition: all 0.25s ease;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .item-keahlian:hover {
+            transform: translateY(-6px) scale(1.02);
+            box-shadow: 0 12px 28px rgba(124, 58, 237, 0.20);
+            border-color: var(--ungu-muda);
+        }
+
+        .item-keahlian:active {
+            transform: scale(0.96);
         }
 
         .item-keahlian .icon-big {
@@ -221,6 +233,18 @@
             font-size: 12px;
             color: #6b6b80;
             margin-top: 2px;
+        }
+
+        .item-keahlian .link-hint {
+            font-size: 10px;
+            color: var(--ungu);
+            margin-top: 8px;
+            opacity: 0.6;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
         }
 
         .item-keahlian:nth-child(1) .icon-big {
@@ -302,6 +326,11 @@
             border-radius: 20px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
             border: 1px solid rgba(124, 58, 237, 0.08);
+            transition: transform 0.2s;
+        }
+
+        .kontak-item:hover {
+            transform: translateX(4px);
         }
 
         .kontak-item .icon-box {
@@ -452,6 +481,40 @@
             font-weight: 800;
         }
 
+        /* ----- TOMBOL / EFEK LAIN ----- */
+        .btn-cta {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--ungu), var(--pink));
+            color: #fff;
+            font-weight: 700;
+            padding: 12px 28px;
+            border-radius: 40px;
+            border: none;
+            box-shadow: 0 8px 24px rgba(124, 58, 237, 0.30);
+            font-size: 15px;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+
+        .btn-cta:hover {
+            transform: scale(1.03);
+            box-shadow: 0 10px 32px rgba(124, 58, 237, 0.40);
+        }
+
+        /* ----- FOOTER HALAMAN ----- */
+        .footer-note {
+            text-align: center;
+            font-size: 12px;
+            color: #a09bb8;
+            margin-top: 24px;
+            padding-top: 12px;
+            border-top: 1px dashed rgba(124, 58, 237, 0.15);
+        }
+
+        .footer-note i {
+            color: var(--pink);
+        }
+
         /* ----- RESPONSIVE ----- */
         @media (max-width: 420px) {
             .page {
@@ -477,53 +540,19 @@
                 font-size: 19px;
             }
         }
-
-        /* ----- TOMBOL / EFEK LAIN ----- */
-        .btn-cta {
-            display: inline-block;
-            background: linear-gradient(135deg, var(--ungu), var(--pink));
-            color: #fff;
-            font-weight: 700;
-            padding: 12px 28px;
-            border-radius: 40px;
-            border: none;
-            box-shadow: 0 8px 24px rgba(124, 58, 237, 0.30);
-            font-size: 15px;
-            transition: all 0.2s;
-            cursor: pointer;
-        }
-
-        .btn-cta:hover {
-            transform: scale(1.03);
-            box-shadow: 0 10px 32px rgba(124, 58, 237, 0.40);
-        }
-
-        /* ----- TANDA TANGAN / FOOTER HALAMAN ----- */
-        .footer-note {
-            text-align: center;
-            font-size: 12px;
-            color: #a09bb8;
-            margin-top: 24px;
-            padding-top: 12px;
-            border-top: 1px dashed rgba(124, 58, 237, 0.15);
-        }
-
-        .footer-note i {
-            color: var(--pink);
-        }
     </style>
 </head>
 <body>
 
     <!-- ===================== HALAMAN 1 : BERANDA ===================== -->
     <div id="page-beranda" class="page active">
-        <div class="page-header">
+        <div class="page-header animate-on-show">
             <div class="icon-circle"><i class="fas fa-graduation-cap"></i></div>
             <h2>SMK Satya Praja 2</h2>
             <span class="badge-year">TA 2026/2027</span>
         </div>
 
-        <div class="card card-rainbow" style="background: linear-gradient(145deg, #faf5ff, #fff5f9);">
+        <div class="card card-rainbow animate-on-show" style="background: linear-gradient(145deg, #faf5ff, #fff5f9);">
             <div style="display:flex; align-items:center; gap:12px; margin-bottom:10px;">
                 <span style="font-size:40px;">🎉</span>
                 <div>
@@ -547,24 +576,24 @@
         </div>
 
         <div style="display:flex; gap:12px; flex-wrap:wrap; margin-bottom:16px;">
-            <div class="card" style="flex:1; min-width:120px; text-align:center; padding:16px 10px;">
+            <div class="card animate-on-show" style="flex:1; min-width:120px; text-align:center; padding:16px 10px;">
                 <div style="font-size:32px; color:var(--ungu);">👩‍🏫</div>
                 <div style="font-weight:700; font-size:18px; color:#1e1b2e;">48</div>
                 <div style="font-size:12px; color:#8b8ba3;">Guru</div>
             </div>
-            <div class="card" style="flex:1; min-width:120px; text-align:center; padding:16px 10px;">
+            <div class="card animate-on-show" style="flex:1; min-width:120px; text-align:center; padding:16px 10px;">
                 <div style="font-size:32px; color:var(--pink);">🧑‍🎓</div>
                 <div style="font-weight:700; font-size:18px; color:#1e1b2e;">720+</div>
                 <div style="font-size:12px; color:#8b8ba3;">Siswa</div>
             </div>
-            <div class="card" style="flex:1; min-width:120px; text-align:center; padding:16px 10px;">
+            <div class="card animate-on-show" style="flex:1; min-width:120px; text-align:center; padding:16px 10px;">
                 <div style="font-size:32px; color:var(--gold);">🏆</div>
                 <div style="font-weight:700; font-size:18px; color:#1e1b2e;">32</div>
                 <div style="font-size:12px; color:#8b8ba3;">Prestasi</div>
             </div>
         </div>
 
-        <div class="card" style="background:linear-gradient(135deg, var(--ungu-sangat-muda), var(--pink-sangat-muda)); border:1px solid rgba(124,58,237,0.15);">
+        <div class="card animate-on-show" style="background:linear-gradient(135deg, var(--ungu-sangat-muda), var(--pink-sangat-muda)); border:1px solid rgba(124,58,237,0.15);">
             <p style="font-weight:700; color:#1e1b2e; display:flex; align-items:center; gap:8px;">
                 <i class="fas fa-calendar-alt" style="color:var(--ungu);"></i>
                 Kalender Akademik 2026/2027
@@ -576,20 +605,20 @@
             </div>
         </div>
 
-        <div class="footer-note">
+        <div class="footer-note animate-on-show">
             <i class="fas fa-arrow-up"></i> Geser untuk jelajahi
         </div>
     </div>
 
     <!-- ===================== HALAMAN 2 : TENTANG ===================== -->
     <div id="page-tentang" class="page">
-        <div class="page-header">
+        <div class="page-header animate-on-show">
             <div class="icon-circle"><i class="fas fa-building-columns"></i></div>
             <h2>Tentang Sekolah</h2>
             <span class="badge-year">2026/2027</span>
         </div>
 
-        <div class="card">
+        <div class="card animate-on-show">
             <h4 style="color:var(--ungu); font-size:18px; margin-bottom:6px;"><i class="fas fa-flag"></i> Visi</h4>
             <p style="font-weight:600; color:#2d2a40;">"Menjadi SMK unggul yang mencetak lulusan berkarakter, berdaya saing global, dan berwawasan lingkungan."</p>
             <div style="margin:14px 0 8px; height:2px; background:linear-gradient(90deg,var(--ungu),var(--pink),var(--gold));"></div>
@@ -601,7 +630,7 @@
             </ul>
         </div>
 
-        <div class="card" style="background:linear-gradient(145deg, #faf5ff, #fff5f9);">
+        <div class="card animate-on-show" style="background:linear-gradient(145deg, #faf5ff, #fff5f9);">
             <div style="display:flex; gap:12px; flex-wrap:wrap;">
                 <span class="chip chip-ungu"><i class="fas fa-school"></i> Akreditasi A</span>
                 <span class="chip chip-pink"><i class="fas fa-calendar"></i> Berdiri 1998</span>
@@ -615,29 +644,60 @@
                 penguatan karakter.
             </p>
         </div>
-        <div class="footer-note">
+        <div class="footer-note animate-on-show">
             <i class="fas fa-heart" style="color:var(--pink);"></i> 27 tahun menginspirasi
         </div>
     </div>
 
     <!-- ===================== HALAMAN 3 : PROGRAM ===================== -->
     <div id="page-program" class="page">
-        <div class="page-header">
+        <div class="page-header animate-on-show">
             <div class="icon-circle"><i class="fas fa-laptop-code"></i></div>
             <h2>Program Keahlian</h2>
             <span class="badge-year">2026/2027</span>
         </div>
 
         <div class="grid-dua">
-            <div class="item-keahlian"><span class="icon-big">💻</span><h4>RPL</h4><p>Rekayasa Perangkat Lunak</p></div>
-            <div class="item-keahlian"><span class="icon-big">📡</span><h4>TKJ</h4><p>Teknik Komputer & Jaringan</p></div>
-            <div class="item-keahlian"><span class="icon-big">🎨</span><h4>DKV</h4><p>Desain Komunikasi Visual</p></div>
-            <div class="item-keahlian"><span class="icon-big">⚡</span><h4>TITL</h4><p>Teknik Instalasi Tenaga Listrik</p></div>
-            <div class="item-keahlian"><span class="icon-big">🧑‍🍳</span><h4>Tata Boga</h4><p>Pengolahan & Kuliner</p></div>
-            <div class="item-keahlian"><span class="icon-big">🛠️</span><h4>Mesin</h4><p>Teknik Pemesinan</p></div>
+            <!-- Masing-masing kartu jurusan adalah LINK ke halaman lain -->
+            <div class="item-keahlian animate-on-show" data-target-page="page-fasilitas">
+                <span class="icon-big">💻</span>
+                <h4>RPL</h4>
+                <p>Rekayasa Perangkat Lunak</p>
+                <div class="link-hint"><i class="fas fa-arrow-right"></i> Lihat Fasilitas</div>
+            </div>
+            <div class="item-keahlian animate-on-show" data-target-page="page-galeri">
+                <span class="icon-big">📡</span>
+                <h4>TKJ</h4>
+                <p>Teknik Komputer & Jaringan</p>
+                <div class="link-hint"><i class="fas fa-arrow-right"></i> Lihat Galeri</div>
+            </div>
+            <div class="item-keahlian animate-on-show" data-target-page="page-kontak">
+                <span class="icon-big">🎨</span>
+                <h4>DKV</h4>
+                <p>Desain Komunikasi Visual</p>
+                <div class="link-hint"><i class="fas fa-arrow-right"></i> Hubungi Kami</div>
+            </div>
+            <div class="item-keahlian animate-on-show" data-target-page="page-tentang">
+                <span class="icon-big">⚡</span>
+                <h4>TITL</h4>
+                <p>Teknik Instalasi Tenaga Listrik</p>
+                <div class="link-hint"><i class="fas fa-arrow-right"></i> Tentang Sekolah</div>
+            </div>
+            <div class="item-keahlian animate-on-show" data-target-page="page-beranda">
+                <span class="icon-big">🧑‍🍳</span>
+                <h4>Tata Boga</h4>
+                <p>Pengolahan & Kuliner</p>
+                <div class="link-hint"><i class="fas fa-arrow-right"></i> Ke Beranda</div>
+            </div>
+            <div class="item-keahlian animate-on-show" data-target-page="page-fasilitas">
+                <span class="icon-big">🛠️</span>
+                <h4>Mesin</h4>
+                <p>Teknik Pemesinan</p>
+                <div class="link-hint"><i class="fas fa-arrow-right"></i> Lihat Fasilitas</div>
+            </div>
         </div>
 
-        <div class="card" style="margin-top:6px;">
+        <div class="card animate-on-show" style="margin-top:6px;">
             <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
                 <span class="chip chip-ungu"><i class="fas fa-user-graduate"></i> 6 Jurusan</span>
                 <span class="chip chip-pink"><i class="fas fa-chalkboard-user"></i> Guru kompeten</span>
@@ -648,20 +708,20 @@
                 berkolaborasi dengan industri mitra.
             </p>
         </div>
-        <div class="footer-note">
-            <i class="fas fa-arrow-right"></i> Pilih jurusan sesuai minatmu
+        <div class="footer-note animate-on-show">
+            <i class="fas fa-arrow-right"></i> Klik kartu jurusan untuk menjelajah
         </div>
     </div>
 
     <!-- ===================== HALAMAN 4 : FASILITAS ===================== -->
     <div id="page-fasilitas" class="page">
-        <div class="page-header">
+        <div class="page-header animate-on-show">
             <div class="icon-circle"><i class="fas fa-cubes"></i></div>
             <h2>Fasilitas</h2>
             <span class="badge-year">2026/2027</span>
         </div>
 
-        <div class="card" style="background:linear-gradient(145deg, #faf5ff, #fff5f9);">
+        <div class="card animate-on-show" style="background:linear-gradient(145deg, #faf5ff, #fff5f9);">
             <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
                 <div style="background:white; border-radius:18px; padding:14px; text-align:center; box-shadow:0 4px 12px rgba(0,0,0,0.04);">
                     <div style="font-size:28px; color:var(--ungu);">🏫</div>
@@ -690,7 +750,7 @@
             </div>
         </div>
 
-        <div class="card" style="border-left:6px solid var(--gold); border-right:6px solid var(--pink);">
+        <div class="card animate-on-show" style="border-left:6px solid var(--gold); border-right:6px solid var(--pink);">
             <p style="font-weight:600; color:#2d2a40; display:flex; align-items:center; gap:10px;">
                 <i class="fas fa-wifi" style="color:var(--ungu);"></i> Wi-Fi kampus & ruang ber-AC
             </p>
@@ -698,29 +758,29 @@
                 Fasilitas modern untuk mendukung pembelajaran abad 21.
             </p>
         </div>
-        <div class="footer-note">
+        <div class="footer-note animate-on-show">
             <i class="fas fa-check"></i> Sarana lengkap & nyaman
         </div>
     </div>
 
     <!-- ===================== HALAMAN 5 : GALERI ===================== -->
     <div id="page-galeri" class="page">
-        <div class="page-header">
+        <div class="page-header animate-on-show">
             <div class="icon-circle"><i class="fas fa-images"></i></div>
             <h2>Galeri</h2>
             <span class="badge-year">2026/2027</span>
         </div>
 
         <div class="galeri-grid">
-            <div class="galeri-item">📸</div>
-            <div class="galeri-item">🎓</div>
-            <div class="galeri-item">🏅</div>
-            <div class="galeri-item">🎭</div>
-            <div class="galeri-item">🌿</div>
-            <div class="galeri-item">🤝</div>
+            <div class="galeri-item animate-on-show">📸</div>
+            <div class="galeri-item animate-on-show">🎓</div>
+            <div class="galeri-item animate-on-show">🏅</div>
+            <div class="galeri-item animate-on-show">🎭</div>
+            <div class="galeri-item animate-on-show">🌿</div>
+            <div class="galeri-item animate-on-show">🤝</div>
         </div>
 
-        <div class="card" style="text-align:center; background:linear-gradient(135deg, var(--ungu-sangat-muda), var(--pink-sangat-muda));">
+        <div class="card animate-on-show" style="text-align:center; background:linear-gradient(135deg, var(--ungu-sangat-muda), var(--pink-sangat-muda));">
             <p style="font-weight:700; color:#1e1b2e;">
                 <i class="fas fa-camera" style="color:var(--ungu);"></i> Momen terbaik di SMK Satya Praja 2
             </p>
@@ -730,43 +790,43 @@
                 <span class="chip chip-gold">#Prestasi</span>
             </div>
         </div>
-        <div class="footer-note">
+        <div class="footer-note animate-on-show">
             <i class="fas fa-camera-retro"></i> Kenangan indah 2026/2027
         </div>
     </div>
 
     <!-- ===================== HALAMAN 6 : KONTAK ===================== -->
     <div id="page-kontak" class="page">
-        <div class="page-header">
+        <div class="page-header animate-on-show">
             <div class="icon-circle"><i class="fas fa-phone"></i></div>
             <h2>Kontak</h2>
             <span class="badge-year">2026/2027</span>
         </div>
 
         <div class="kontak-list">
-            <div class="kontak-item">
+            <div class="kontak-item animate-on-show">
                 <div class="icon-box ungu"><i class="fas fa-map-pin"></i></div>
                 <div class="info"><div class="label">Alamat</div><div class="value">Jl. Raya Petarukan No. 45, Pemalang</div></div>
             </div>
-            <div class="kontak-item">
+            <div class="kontak-item animate-on-show">
                 <div class="icon-box pink"><i class="fas fa-phone-alt"></i></div>
                 <div class="info"><div class="label">Telepon</div><div class="value">(0284) 1234567</div></div>
             </div>
-            <div class="kontak-item">
+            <div class="kontak-item animate-on-show">
                 <div class="icon-box gold"><i class="fas fa-envelope"></i></div>
                 <div class="info"><div class="label">Email</div><div class="value">info@smksatya2.sch.id</div></div>
             </div>
-            <div class="kontak-item">
+            <div class="kontak-item animate-on-show">
                 <div class="icon-box hijau"><i class="fab fa-instagram"></i></div>
                 <div class="info"><div class="label">Instagram</div><div class="value">@smksatya2_petarukan</div></div>
             </div>
-            <div class="kontak-item">
+            <div class="kontak-item animate-on-show">
                 <div class="icon-box biru"><i class="fab fa-youtube"></i></div>
                 <div class="info"><div class="label">YouTube</div><div class="value">SMK Satya Praja 2 Official</div></div>
             </div>
         </div>
 
-        <div class="card" style="text-align:center; background:linear-gradient(135deg, #faf5ff, #fff5f9);">
+        <div class="card animate-on-show" style="text-align:center; background:linear-gradient(135deg, #faf5ff, #fff5f9);">
             <p style="font-weight:700; color:#1e1b2e;">
                 <i class="fas fa-paper-plane" style="color:var(--pink);"></i> Siap membantu Anda!
             </p>
@@ -774,7 +834,7 @@
                 <i class="fas fa-comment"></i> Hubungi Kami
             </button>
         </div>
-        <div class="footer-note">
+        <div class="footer-note animate-on-show">
             <i class="fas fa-heart" style="color:var(--pink);"></i> Terima kasih kunjungannya
         </div>
     </div>
@@ -813,16 +873,16 @@
             const navButtons = document.querySelectorAll('.nav-item');
             const pages = document.querySelectorAll('.page');
 
-            // Fungsi untuk pindah halaman
+            // Fungsi untuk pindah halaman dengan animasi komponen bertahap
             function navigateTo(pageId) {
                 // Sembunyikan semua halaman
                 pages.forEach(p => p.classList.remove('active'));
 
                 // Tampilkan halaman target
                 const target = document.getElementById(pageId);
-                if (target) {
-                    target.classList.add('active');
-                }
+                if (!target) return;
+
+                target.classList.add('active');
 
                 // Update class active pada nav
                 navButtons.forEach(btn => {
@@ -832,7 +892,19 @@
                     }
                 });
 
-                // Scroll ke atas (opsional)
+                // Trigger staggered animation untuk komponen di halaman target
+                const items = target.querySelectorAll('.animate-on-show');
+                items.forEach((el, index) => {
+                    // Reset terlebih dahulu
+                    el.classList.remove('is-visible');
+                    // Staggered delay: 80ms per item, max delay 1s
+                    const delay = 80 + (index * 80);
+                    setTimeout(() => {
+                        el.classList.add('is-visible');
+                    }, delay);
+                });
+
+                // Scroll ke atas
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             }
 
@@ -842,6 +914,16 @@
                     const pageId = this.dataset.page;
                     if (pageId) {
                         navigateTo(pageId);
+                    }
+                });
+            });
+
+            // Event listener untuk kartu jurusan (program keahlian) sebagai link
+            document.querySelectorAll('.item-keahlian[data-target-page]').forEach(el => {
+                el.addEventListener('click', function(e) {
+                    const targetPage = this.dataset.targetPage;
+                    if (targetPage) {
+                        navigateTo(targetPage);
                     }
                 });
             });
@@ -857,19 +939,20 @@
                 }
             });
 
-            // Jika hash saat load
+            // Inisialisasi: jika hash saat load
             const initialHash = location.hash.replace('#', '');
             if (initialHash) {
                 const targetPage = document.getElementById(initialHash);
                 if (targetPage) {
                     navigateTo(initialHash);
+                } else {
+                    navigateTo('page-beranda');
                 }
             } else {
-                // default: beranda
+                // default: beranda dengan animasi
                 navigateTo('page-beranda');
             }
 
-            // Opsional: sentuh / klik di luar untuk efek (tidak wajib)
             console.log('🎓 SMK Satya Praja 2 Petarukan · TA 2026/2027');
         })();
     </script>
