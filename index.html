@@ -10,31 +10,53 @@
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700;800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
     <style>
-        /* ----- RESET & BASE ----- */
+        /* ----- RESET & BASE (Background Gelap) ----- */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
+        :root {
+            --ungu: #a78bfa;
+            --ungu-muda: #c4b5fd;
+            --ungu-sangat-muda: #ede9fe;
+            --pink: #f472b6;
+            --pink-muda: #f9a8d4;
+            --pink-sangat-muda: #fce7f3;
+            --gold: #fbbf24;
+            --orange: #fb923c;
+            --hijau: #34d399;
+            --biru: #60a5fa;
+            --teal: #2dd4bf;
+            --card-shadow: 0 12px 32px rgba(0, 0, 0, 0.5);
+            --nav-bg: rgba(30, 27, 46, 0.92);
+            --glass-border: rgba(167, 139, 250, 0.25);
+            --bg-body: #0f0a1a;
+            --text-primary: #f1f0f7;
+            --text-secondary: #c8c3db;
+            --card-bg: rgba(255, 255, 255, 0.07);
+        }
+
         body {
             font-family: 'Quicksand', sans-serif;
-            background: #f9f3ff;
+            background: var(--bg-body);
             min-height: 100vh;
             padding-bottom: 90px;
             overflow-x: hidden;
             position: relative;
+            color: var(--text-primary);
         }
 
         /* ----- DEKORASI MENGGAMBUNG (sudut layar) ----- */
         .deco {
             position: fixed;
             font-size: 28px;
-            opacity: 0.6;
+            opacity: 0.5;
             pointer-events: none;
             z-index: 0;
             animation: floatDeco 6s ease-in-out infinite alternate;
-            filter: drop-shadow(0 4px 12px rgba(124, 58, 237, 0.15));
+            filter: drop-shadow(0 4px 12px rgba(167, 139, 250, 0.2));
         }
 
         .deco-1 {
@@ -71,7 +93,7 @@
             animation-delay: 0.3s;
             font-size: 22px;
             color: #fb7185;
-            opacity: 0.4;
+            opacity: 0.3;
         }
         .deco-6 {
             top: 50%;
@@ -79,7 +101,7 @@
             animation-delay: 1.0s;
             font-size: 24px;
             color: #fbbf24;
-            opacity: 0.4;
+            opacity: 0.3;
         }
 
         @keyframes floatDeco {
@@ -107,7 +129,7 @@
             position: absolute;
             width: 10px;
             height: 10px;
-            opacity: 0.3;
+            opacity: 0.35;
             border-radius: 2px;
             animation: confettiFall 10s linear infinite;
         }
@@ -247,7 +269,7 @@
             transform: translateY(0) scale(1);
         }
 
-        /* ----- HEADER / JUDUL HALAMAN ----- */
+        /* ----- HEADER / JUDUL HALAMAN (Teks Terbaca) ----- */
         .page-header {
             display: flex;
             align-items: center;
@@ -263,9 +285,9 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #fff;
+            color: #0f0a1a;
             font-size: 22px;
-            box-shadow: 0 6px 16px rgba(124, 58, 237, 0.35);
+            box-shadow: 0 6px 16px rgba(167, 139, 250, 0.35);
         }
 
         .page-header h2 {
@@ -281,24 +303,25 @@
         .page-header .badge-year {
             margin-left: auto;
             background: linear-gradient(135deg, var(--gold), var(--orange));
-            color: #fff;
+            color: #0f0a1a;
             font-weight: 700;
             font-size: 12px;
             padding: 4px 14px;
             border-radius: 30px;
-            box-shadow: 0 4px 10px rgba(245, 158, 11, 0.35);
+            box-shadow: 0 4px 10px rgba(251, 191, 36, 0.35);
             letter-spacing: 0.5px;
         }
 
-        /* ----- KARTU / CARD (warna-warni) ----- */
+        /* ----- KARTU / CARD (dengan latar gelap) ----- */
         .card {
-            background: #ffffff;
+            background: var(--card-bg);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
             border-radius: 28px;
             padding: 20px 20px 22px;
             margin-bottom: 20px;
             box-shadow: var(--card-shadow);
             border: 1px solid var(--glass-border);
-            backdrop-filter: blur(2px);
             transition: transform 0.2s;
         }
 
@@ -311,10 +334,6 @@
             border-right: 6px solid var(--pink);
         }
 
-        .card-warna {
-            background: linear-gradient(145deg, #ffffff, #faf5ff);
-        }
-
         /* ----- CHIP & LABEL WARNA-WARNI ----- */
         .chip {
             display: inline-block;
@@ -324,20 +343,20 @@
             font-size: 13px;
             letter-spacing: 0.3px;
             margin: 4px 6px 4px 0;
-            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.06);
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
         }
 
         .chip-ungu {
             background: var(--ungu-sangat-muda);
-            color: var(--ungu);
+            color: #4c1d95;
         }
         .chip-pink {
             background: var(--pink-sangat-muda);
-            color: var(--pink);
+            color: #9d174d;
         }
         .chip-gold {
             background: #fef3c7;
-            color: #b45309;
+            color: #92400e;
         }
         .chip-hijau {
             background: #d1fae5;
@@ -364,12 +383,13 @@
         }
 
         .item-keahlian {
-            background: white;
+            background: var(--card-bg);
+            backdrop-filter: blur(4px);
             border-radius: 20px;
             padding: 16px 12px;
             text-align: center;
-            box-shadow: 0 6px 18px rgba(124, 58, 237, 0.10);
-            border: 1px solid rgba(124, 58, 237, 0.08);
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--glass-border);
             transition: all 0.25s ease;
             cursor: pointer;
             position: relative;
@@ -377,8 +397,8 @@
 
         .item-keahlian:hover {
             transform: translateY(-6px) scale(1.02);
-            box-shadow: 0 12px 28px rgba(124, 58, 237, 0.20);
-            border-color: var(--ungu-muda);
+            box-shadow: 0 12px 28px rgba(167, 139, 250, 0.25);
+            border-color: var(--ungu);
         }
 
         .item-keahlian:active {
@@ -393,11 +413,11 @@
         .item-keahlian h4 {
             font-size: 15px;
             font-weight: 700;
-            color: #1e1b2e;
+            color: var(--text-primary);
         }
         .item-keahlian p {
             font-size: 12px;
-            color: #6b6b80;
+            color: var(--text-secondary);
             margin-top: 2px;
         }
 
@@ -405,7 +425,7 @@
             font-size: 10px;
             color: var(--ungu);
             margin-top: 8px;
-            opacity: 0.6;
+            opacity: 0.7;
             font-weight: 600;
             display: flex;
             align-items: center;
@@ -436,25 +456,25 @@
         .galeri-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 3px;
-            background: #fff;
+            gap: 4px;
+            background: var(--card-bg);
             border-radius: 18px;
             overflow: hidden;
-            box-shadow: 0 6px 20px rgba(124, 58, 237, 0.12);
-            border: 1px solid rgba(124, 58, 237, 0.08);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--glass-border);
         }
 
         .galeri-item {
             position: relative;
             aspect-ratio: 1/1;
-            background: #f0ebf9;
+            background: #1a142b;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 30px;
             font-weight: 700;
             color: #fff;
-            text-shadow: 0 2px 12px rgba(0, 0, 0, 0.25);
+            text-shadow: 0 2px 12px rgba(0, 0, 0, 0.5);
             transition: transform 0.25s ease, filter 0.3s;
             cursor: pointer;
             overflow: hidden;
@@ -462,7 +482,7 @@
 
         .galeri-item:hover {
             transform: scale(1.03);
-            filter: brightness(1.08);
+            filter: brightness(1.15);
             z-index: 2;
         }
 
@@ -472,7 +492,7 @@
             left: 0;
             right: 0;
             padding: 8px 6px;
-            background: linear-gradient(transparent, rgba(0, 0, 0, 0.45));
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.6));
             display: flex;
             justify-content: space-around;
             color: #fff;
@@ -536,11 +556,12 @@
             display: flex;
             align-items: center;
             gap: 16px;
-            background: white;
+            background: var(--card-bg);
+            backdrop-filter: blur(4px);
             padding: 14px 18px;
             border-radius: 20px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
-            border: 1px solid rgba(124, 58, 237, 0.08);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--glass-border);
             transition: transform 0.2s;
         }
 
@@ -556,7 +577,7 @@
             align-items: center;
             justify-content: center;
             font-size: 20px;
-            color: #fff;
+            color: #0f0a1a;
         }
 
         .kontak-item .icon-box.ungu {
@@ -581,13 +602,13 @@
         .kontak-item .info .label {
             font-size: 12px;
             font-weight: 600;
-            color: #8b8ba3;
+            color: var(--text-secondary);
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
         .kontak-item .info .value {
             font-weight: 700;
-            color: #1e1b2e;
+            color: var(--text-primary);
             font-size: 16px;
         }
 
@@ -600,8 +621,8 @@
             background: var(--nav-bg);
             backdrop-filter: blur(18px) saturate(180%);
             -webkit-backdrop-filter: blur(18px) saturate(180%);
-            border-top: 1px solid rgba(124, 58, 237, 0.15);
-            box-shadow: 0 -8px 30px rgba(124, 58, 237, 0.10);
+            border-top: 1px solid var(--glass-border);
+            box-shadow: 0 -8px 30px rgba(0, 0, 0, 0.5);
             display: flex;
             justify-content: space-around;
             align-items: center;
@@ -622,7 +643,7 @@
             border: none;
             padding: 4px 10px;
             cursor: pointer;
-            color: #a09bb8;
+            color: #8b85a8;
             font-size: 11px;
             font-weight: 600;
             transition: all 0.25s;
@@ -649,7 +670,7 @@
         .bottom-nav .nav-item.active i {
             transform: translateY(-4px) scale(1.12);
             color: var(--ungu);
-            text-shadow: 0 4px 12px rgba(124, 58, 237, 0.30);
+            text-shadow: 0 4px 12px rgba(167, 139, 250, 0.4);
         }
 
         .bottom-nav .nav-item.active::after {
@@ -700,12 +721,12 @@
         .btn-cta {
             display: inline-block;
             background: linear-gradient(135deg, var(--ungu), var(--pink));
-            color: #fff;
+            color: #0f0a1a;
             font-weight: 700;
             padding: 12px 28px;
             border-radius: 40px;
             border: none;
-            box-shadow: 0 8px 24px rgba(124, 58, 237, 0.30);
+            box-shadow: 0 8px 24px rgba(167, 139, 250, 0.35);
             font-size: 15px;
             transition: all 0.2s;
             cursor: pointer;
@@ -713,17 +734,17 @@
 
         .btn-cta:hover {
             transform: scale(1.03);
-            box-shadow: 0 10px 32px rgba(124, 58, 237, 0.40);
+            box-shadow: 0 10px 32px rgba(167, 139, 250, 0.5);
         }
 
         /* ----- FOOTER HALAMAN ----- */
         .footer-note {
             text-align: center;
             font-size: 12px;
-            color: #a09bb8;
+            color: var(--text-secondary);
             margin-top: 24px;
             padding-top: 12px;
-            border-top: 1px dashed rgba(124, 58, 237, 0.15);
+            border-top: 1px dashed rgba(167, 139, 250, 0.2);
         }
 
         .footer-note i {
@@ -793,22 +814,22 @@
 
     <!-- ===================== HALAMAN 1 : BERANDA ===================== -->
     <div id="page-beranda" class="page active">
-        <div class="page-header animate-on-show">
+        <div class="page-header animate-on-show is-visible">
             <div class="icon-circle"><i class="fas fa-graduation-cap"></i></div>
             <h2>SMK Satya Praja 2</h2>
             <span class="badge-year">TA 2026/2027</span>
         </div>
 
-        <div class="card card-rainbow animate-on-show" style="background: linear-gradient(145deg, #faf5ff, #fff5f9);">
+        <div class="card card-rainbow animate-on-show is-visible" style="background: rgba(167, 139, 250, 0.08); backdrop-filter: blur(8px);">
             <div style="display:flex; align-items:center; gap:12px; margin-bottom:10px;">
                 <span style="font-size:40px;">🎉</span>
                 <div>
-                    <h3 style="font-size:20px; font-weight:800; color:#1e1b2e;">Selamat Tahun Ajaran Baru!</h3>
-                    <p style="color:#6b6b80; font-weight:600;">2026/2027 · Semangat Belajar!</p>
+                    <h3 style="font-size:20px; font-weight:800; color:var(--text-primary);">Selamat Tahun Ajaran Baru!</h3>
+                    <p style="color:var(--text-secondary); font-weight:600;">2026/2027 · Semangat Belajar!</p>
                 </div>
             </div>
             <div class="rainbow-line"></div>
-            <p style="margin-top:12px; color:#3d3a4f; font-weight:600; line-height:1.6;">
+            <p style="margin-top:12px; color:var(--text-secondary); font-weight:600; line-height:1.6;">
                 <i class="fas fa-quote-left" style="color:var(--ungu); opacity:0.5;"></i>
                 Membangun generasi <span class="sparkle-text">berkarakter, kreatif, dan kompeten</span>
                 menyongsong masa depan cerah.
@@ -823,25 +844,25 @@
         </div>
 
         <div style="display:flex; gap:12px; flex-wrap:wrap; margin-bottom:16px;">
-            <div class="card animate-on-show" style="flex:1; min-width:120px; text-align:center; padding:16px 10px;">
+            <div class="card animate-on-show is-visible" style="flex:1; min-width:120px; text-align:center; padding:16px 10px;">
                 <div style="font-size:32px; color:var(--ungu);">👩‍🏫</div>
-                <div style="font-weight:700; font-size:18px; color:#1e1b2e;">48</div>
-                <div style="font-size:12px; color:#8b8ba3;">Guru</div>
+                <div style="font-weight:700; font-size:18px; color:var(--text-primary);">48</div>
+                <div style="font-size:12px; color:var(--text-secondary);">Guru</div>
             </div>
-            <div class="card animate-on-show" style="flex:1; min-width:120px; text-align:center; padding:16px 10px;">
+            <div class="card animate-on-show is-visible" style="flex:1; min-width:120px; text-align:center; padding:16px 10px;">
                 <div style="font-size:32px; color:var(--pink);">🧑‍🎓</div>
-                <div style="font-weight:700; font-size:18px; color:#1e1b2e;">720+</div>
-                <div style="font-size:12px; color:#8b8ba3;">Siswa</div>
+                <div style="font-weight:700; font-size:18px; color:var(--text-primary);">720+</div>
+                <div style="font-size:12px; color:var(--text-secondary);">Siswa</div>
             </div>
-            <div class="card animate-on-show" style="flex:1; min-width:120px; text-align:center; padding:16px 10px;">
+            <div class="card animate-on-show is-visible" style="flex:1; min-width:120px; text-align:center; padding:16px 10px;">
                 <div style="font-size:32px; color:var(--gold);">🏆</div>
-                <div style="font-weight:700; font-size:18px; color:#1e1b2e;">32</div>
-                <div style="font-size:12px; color:#8b8ba3;">Prestasi</div>
+                <div style="font-weight:700; font-size:18px; color:var(--text-primary);">32</div>
+                <div style="font-size:12px; color:var(--text-secondary);">Prestasi</div>
             </div>
         </div>
 
-        <div class="card animate-on-show" style="background:linear-gradient(135deg, var(--ungu-sangat-muda), var(--pink-sangat-muda)); border:1px solid rgba(124,58,237,0.15);">
-            <p style="font-weight:700; color:#1e1b2e; display:flex; align-items:center; gap:8px;">
+        <div class="card animate-on-show is-visible" style="background: rgba(167, 139, 250, 0.06); border:1px solid var(--glass-border);">
+            <p style="font-weight:700; color:var(--text-primary); display:flex; align-items:center; gap:8px;">
                 <i class="fas fa-calendar-alt" style="color:var(--ungu);"></i>
                 Kalender Akademik 2026/2027
             </p>
@@ -852,7 +873,7 @@
             </div>
         </div>
 
-        <div class="footer-note animate-on-show">
+        <div class="footer-note animate-on-show is-visible">
             <i class="fas fa-arrow-up"></i> Geser untuk jelajahi
         </div>
     </div>
@@ -867,24 +888,24 @@
 
         <div class="card animate-on-show">
             <h4 style="color:var(--ungu); font-size:18px; margin-bottom:6px;"><i class="fas fa-flag"></i> Visi</h4>
-            <p style="font-weight:600; color:#2d2a40;">"Menjadi SMK unggul yang mencetak lulusan berkarakter, berdaya saing global, dan berwawasan lingkungan."</p>
+            <p style="font-weight:600; color:var(--text-secondary);">"Menjadi SMK unggul yang mencetak lulusan berkarakter, berdaya saing global, dan berwawasan lingkungan."</p>
             <div style="margin:14px 0 8px; height:2px; background:linear-gradient(90deg,var(--ungu),var(--pink),var(--gold));"></div>
             <h4 style="color:var(--pink); font-size:18px; margin-bottom:6px;"><i class="fas fa-bullseye"></i> Misi</h4>
-            <ul style="list-style:none; padding:0; font-size:14px; color:#3d3a4f; font-weight:500;">
-                <li style="padding:6px 0; border-bottom:1px dashed #f0ebf9;">✅ Menyelenggarakan pendidikan vokasi berbasis industri</li>
-                <li style="padding:6px 0; border-bottom:1px dashed #f0ebf9;">✅ Mengembangkan karakter religius & nasionalis</li>
+            <ul style="list-style:none; padding:0; font-size:14px; color:var(--text-secondary); font-weight:500;">
+                <li style="padding:6px 0; border-bottom:1px dashed rgba(167, 139, 250, 0.15);">✅ Menyelenggarakan pendidikan vokasi berbasis industri</li>
+                <li style="padding:6px 0; border-bottom:1px dashed rgba(167, 139, 250, 0.15);">✅ Mengembangkan karakter religius & nasionalis</li>
                 <li style="padding:6px 0;">✅ Mewujudkan sekolah ramah anak dan inklusif</li>
             </ul>
         </div>
 
-        <div class="card animate-on-show" style="background:linear-gradient(145deg, #faf5ff, #fff5f9);">
+        <div class="card animate-on-show" style="background: rgba(167, 139, 250, 0.06);">
             <div style="display:flex; gap:12px; flex-wrap:wrap;">
                 <span class="chip chip-ungu"><i class="fas fa-school"></i> Akreditasi A</span>
                 <span class="chip chip-pink"><i class="fas fa-calendar"></i> Berdiri 1998</span>
                 <span class="chip chip-gold"><i class="fas fa-map-pin"></i> Petarukan</span>
                 <span class="chip chip-hijau"><i class="fas fa-globe"></i> Kurikulum Merdeka</span>
             </div>
-            <p style="margin-top:14px; font-size:14px; color:#4a4660; line-height:1.7;">
+            <p style="margin-top:14px; font-size:14px; color:var(--text-secondary); line-height:1.7;">
                 <i class="fas fa-quote-left" style="color:var(--ungu); opacity:0.4; margin-right:4px;"></i>
                 SMK Satya Praja 2 Petarukan berkomitmen mencetak generasi <strong style="color:var(--ungu);">unggul</strong>
                 dan <strong style="color:var(--pink);">berdaya saing</strong> melalui pembelajaran berbasis proyek dan
@@ -949,7 +970,7 @@
                 <span class="chip chip-pink"><i class="fas fa-chalkboard-user"></i> Guru kompeten</span>
                 <span class="chip chip-gold"><i class="fas fa-industry"></i> Link & Match</span>
             </div>
-            <p style="margin-top:12px; font-size:13px; color:#4a4660;">
+            <p style="margin-top:12px; font-size:13px; color:var(--text-secondary);">
                 <i class="fas fa-check-circle" style="color:var(--hijau);"></i> Semua program terakreditasi dan
                 berkolaborasi dengan industri mitra.
             </p>
@@ -967,40 +988,40 @@
             <span class="badge-year">2026/2027</span>
         </div>
 
-        <div class="card animate-on-show" style="background:linear-gradient(145deg, #faf5ff, #fff5f9);">
+        <div class="card animate-on-show" style="background: rgba(167, 139, 250, 0.06);">
             <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
-                <div style="background:white; border-radius:18px; padding:14px; text-align:center; box-shadow:0 4px 12px rgba(0,0,0,0.04);">
+                <div style="background:var(--card-bg); backdrop-filter:blur(4px); border-radius:18px; padding:14px; text-align:center; box-shadow:0 4px 12px rgba(0,0,0,0.2); border:1px solid var(--glass-border);">
                     <div style="font-size:28px; color:var(--ungu);">🏫</div>
-                    <div style="font-weight:700; font-size:14px;">Lab. Komputer</div>
+                    <div style="font-weight:700; font-size:14px; color:var(--text-primary);">Lab. Komputer</div>
                 </div>
-                <div style="background:white; border-radius:18px; padding:14px; text-align:center; box-shadow:0 4px 12px rgba(0,0,0,0.04);">
+                <div style="background:var(--card-bg); backdrop-filter:blur(4px); border-radius:18px; padding:14px; text-align:center; box-shadow:0 4px 12px rgba(0,0,0,0.2); border:1px solid var(--glass-border);">
                     <div style="font-size:28px; color:var(--pink);">📚</div>
-                    <div style="font-weight:700; font-size:14px;">Perpustakaan</div>
+                    <div style="font-weight:700; font-size:14px; color:var(--text-primary);">Perpustakaan</div>
                 </div>
-                <div style="background:white; border-radius:18px; padding:14px; text-align:center; box-shadow:0 4px 12px rgba(0,0,0,0.04);">
+                <div style="background:var(--card-bg); backdrop-filter:blur(4px); border-radius:18px; padding:14px; text-align:center; box-shadow:0 4px 12px rgba(0,0,0,0.2); border:1px solid var(--glass-border);">
                     <div style="font-size:28px; color:var(--gold);">⚽</div>
-                    <div style="font-weight:700; font-size:14px;">Lapangan Olahraga</div>
+                    <div style="font-weight:700; font-size:14px; color:var(--text-primary);">Lapangan Olahraga</div>
                 </div>
-                <div style="background:white; border-radius:18px; padding:14px; text-align:center; box-shadow:0 4px 12px rgba(0,0,0,0.04);">
+                <div style="background:var(--card-bg); backdrop-filter:blur(4px); border-radius:18px; padding:14px; text-align:center; box-shadow:0 4px 12px rgba(0,0,0,0.2); border:1px solid var(--glass-border);">
                     <div style="font-size:28px; color:var(--hijau);">🧪</div>
-                    <div style="font-weight:700; font-size:14px;">Lab. Sains</div>
+                    <div style="font-weight:700; font-size:14px; color:var(--text-primary);">Lab. Sains</div>
                 </div>
-                <div style="background:white; border-radius:18px; padding:14px; text-align:center; box-shadow:0 4px 12px rgba(0,0,0,0.04);">
+                <div style="background:var(--card-bg); backdrop-filter:blur(4px); border-radius:18px; padding:14px; text-align:center; box-shadow:0 4px 12px rgba(0,0,0,0.2); border:1px solid var(--glass-border);">
                     <div style="font-size:28px; color:var(--biru);">🎵</div>
-                    <div style="font-weight:700; font-size:14px;">Ruang Musik</div>
+                    <div style="font-weight:700; font-size:14px; color:var(--text-primary);">Ruang Musik</div>
                 </div>
-                <div style="background:white; border-radius:18px; padding:14px; text-align:center; box-shadow:0 4px 12px rgba(0,0,0,0.04);">
+                <div style="background:var(--card-bg); backdrop-filter:blur(4px); border-radius:18px; padding:14px; text-align:center; box-shadow:0 4px 12px rgba(0,0,0,0.2); border:1px solid var(--glass-border);">
                     <div style="font-size:28px; color:var(--orange);">🖼️</div>
-                    <div style="font-weight:700; font-size:14px;">Galeri Seni</div>
+                    <div style="font-weight:700; font-size:14px; color:var(--text-primary);">Galeri Seni</div>
                 </div>
             </div>
         </div>
 
         <div class="card animate-on-show" style="border-left:6px solid var(--gold); border-right:6px solid var(--pink);">
-            <p style="font-weight:600; color:#2d2a40; display:flex; align-items:center; gap:10px;">
+            <p style="font-weight:600; color:var(--text-primary); display:flex; align-items:center; gap:10px;">
                 <i class="fas fa-wifi" style="color:var(--ungu);"></i> Wi-Fi kampus & ruang ber-AC
             </p>
-            <p style="font-size:13px; color:#6b6b80; margin-top:4px;">
+            <p style="font-size:13px; color:var(--text-secondary); margin-top:4px;">
                 Fasilitas modern untuk mendukung pembelajaran abad 21.
             </p>
         </div>
@@ -1083,8 +1104,8 @@
             </div>
         </div>
 
-        <div class="card animate-on-show" style="text-align:center; background:linear-gradient(135deg, var(--ungu-sangat-muda), var(--pink-sangat-muda)); margin-top:16px;">
-            <p style="font-weight:700; color:#1e1b2e; display:flex; align-items:center; justify-content:center; gap:8px; flex-wrap:wrap;">
+        <div class="card animate-on-show" style="text-align:center; background: rgba(167, 139, 250, 0.06); margin-top:16px;">
+            <p style="font-weight:700; color:var(--text-primary); display:flex; align-items:center; justify-content:center; gap:8px; flex-wrap:wrap;">
                 <i class="fas fa-camera" style="color:var(--ungu);"></i>
                 <span>#SMKSatyaPraja2</span>
                 <span style="color:var(--pink);">❤️</span>
@@ -1134,8 +1155,8 @@
             </div>
         </div>
 
-        <div class="card animate-on-show" style="text-align:center; background:linear-gradient(135deg, #faf5ff, #fff5f9);">
-            <p style="font-weight:700; color:#1e1b2e;">
+        <div class="card animate-on-show" style="text-align:center; background: rgba(167, 139, 250, 0.06);">
+            <p style="font-weight:700; color:var(--text-primary);">
                 <i class="fas fa-paper-plane" style="color:var(--pink);"></i> Siap membantu Anda!
             </p>
             <button class="btn-cta" style="margin-top:10px; font-size:14px; padding:10px 28px;">
