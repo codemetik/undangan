@@ -255,19 +255,80 @@
             }
         }
 
-        /* ----- ANIMASI KOMPONEN (transisi bertahap lebih halus) ----- */
-        .animate-on-show {
+        /* ----- ANIMASI SLIDE DARI BERBAGAI ARAH ----- */
+        /* Dasar: semua elemen dengan animasi mulai tersembunyi */
+        [class*="slide-"] {
             opacity: 0;
-            transform: translateY(24px) scale(0.97);
-            transition: opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1),
-                transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
-            will-change: transform, opacity;
+            animation-duration: 0.8s;
+            animation-fill-mode: forwards;
+            animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
         }
 
-        .animate-on-show.is-visible {
-            opacity: 1;
-            transform: translateY(0) scale(1);
+        /* Animasi dari Kiri */
+        @keyframes slideLeft {
+            0% { opacity: 0; transform: translateX(-60px) scale(0.95); }
+            100% { opacity: 1; transform: translateX(0) scale(1); }
         }
+        .slide-left {
+            animation-name: slideLeft;
+        }
+
+        /* Animasi dari Kanan */
+        @keyframes slideRight {
+            0% { opacity: 0; transform: translateX(60px) scale(0.95); }
+            100% { opacity: 1; transform: translateX(0) scale(1); }
+        }
+        .slide-right {
+            animation-name: slideRight;
+        }
+
+        /* Animasi dari Atas */
+        @keyframes slideTop {
+            0% { opacity: 0; transform: translateY(-60px) scale(0.95); }
+            100% { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        .slide-top {
+            animation-name: slideTop;
+        }
+
+        /* Animasi dari Bawah */
+        @keyframes slideBottom {
+            0% { opacity: 0; transform: translateY(60px) scale(0.95); }
+            100% { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        .slide-bottom {
+            animation-name: slideBottom;
+        }
+
+        /* Animasi dari Kiri-Bawah (diagonal) */
+        @keyframes slideLeftBottom {
+            0% { opacity: 0; transform: translate(-60px, 60px) scale(0.95); }
+            100% { opacity: 1; transform: translate(0, 0) scale(1); }
+        }
+        .slide-diagonal-lb {
+            animation-name: slideLeftBottom;
+        }
+
+        /* Animasi dari Kanan-Atas (diagonal) */
+        @keyframes slideRightTop {
+            0% { opacity: 0; transform: translate(60px, -60px) scale(0.95); }
+            100% { opacity: 1; transform: translate(0, 0) scale(1); }
+        }
+        .slide-diagonal-rt {
+            animation-name: slideRightTop;
+        }
+
+        /* ----- DELAY UNTUK URUTAN MUNCUL ----- */
+        .delay-1 { animation-delay: 0.05s; }
+        .delay-2 { animation-delay: 0.12s; }
+        .delay-3 { animation-delay: 0.20s; }
+        .delay-4 { animation-delay: 0.28s; }
+        .delay-5 { animation-delay: 0.36s; }
+        .delay-6 { animation-delay: 0.44s; }
+        .delay-7 { animation-delay: 0.52s; }
+        .delay-8 { animation-delay: 0.60s; }
+        .delay-9 { animation-delay: 0.68s; }
+        .delay-10 { animation-delay: 0.76s; }
 
         /* ----- HEADER / JUDUL HALAMAN (Teks Terbaca) ----- */
         .page-header {
@@ -814,13 +875,15 @@
 
     <!-- ===================== HALAMAN 1 : BERANDA ===================== -->
     <div id="page-beranda" class="page active">
-        <div class="page-header animate-on-show is-visible">
+        <!-- Header: muncul dari atas -->
+        <div class="page-header slide-top delay-1">
             <div class="icon-circle"><i class="fas fa-graduation-cap"></i></div>
             <h2>SMK Satya Praja 2</h2>
             <span class="badge-year">TA 2026/2027</span>
         </div>
 
-        <div class="card card-rainbow animate-on-show is-visible" style="background: rgba(167, 139, 250, 0.08); backdrop-filter: blur(8px);">
+        <!-- Kartu utama: dari bawah -->
+        <div class="card card-rainbow slide-bottom delay-2" style="background: rgba(167, 139, 250, 0.08); backdrop-filter: blur(8px);">
             <div style="display:flex; align-items:center; gap:12px; margin-bottom:10px;">
                 <span style="font-size:40px;">🎉</span>
                 <div>
@@ -836,57 +899,60 @@
                 <i class="fas fa-quote-right" style="color:var(--pink); opacity:0.5;"></i>
             </p>
             <div style="display:flex; flex-wrap:wrap; gap:8px; margin-top:14px;">
-                <span class="chip chip-ungu"><i class="fas fa-star"></i> Unggul</span>
-                <span class="chip chip-pink"><i class="fas fa-heart"></i> Berkarakter</span>
-                <span class="chip chip-gold"><i class="fas fa-award"></i> Berprestasi</span>
-                <span class="chip chip-hijau"><i class="fas fa-leaf"></i> Inovatif</span>
+                <!-- Chip muncul dari berbagai arah dengan delay -->
+                <span class="chip chip-ungu slide-left delay-3"><i class="fas fa-star"></i> Unggul</span>
+                <span class="chip chip-pink slide-top delay-4"><i class="fas fa-heart"></i> Berkarakter</span>
+                <span class="chip chip-gold slide-right delay-5"><i class="fas fa-award"></i> Berprestasi</span>
+                <span class="chip chip-hijau slide-bottom delay-6"><i class="fas fa-leaf"></i> Inovatif</span>
             </div>
         </div>
 
+        <!-- Tiga kartu statistik: kiri, bawah, kanan -->
         <div style="display:flex; gap:12px; flex-wrap:wrap; margin-bottom:16px;">
-            <div class="card animate-on-show is-visible" style="flex:1; min-width:120px; text-align:center; padding:16px 10px;">
+            <div class="card slide-left delay-3" style="flex:1; min-width:120px; text-align:center; padding:16px 10px;">
                 <div style="font-size:32px; color:var(--ungu);">👩‍🏫</div>
                 <div style="font-weight:700; font-size:18px; color:var(--text-primary);">48</div>
                 <div style="font-size:12px; color:var(--text-secondary);">Guru</div>
             </div>
-            <div class="card animate-on-show is-visible" style="flex:1; min-width:120px; text-align:center; padding:16px 10px;">
+            <div class="card slide-bottom delay-4" style="flex:1; min-width:120px; text-align:center; padding:16px 10px;">
                 <div style="font-size:32px; color:var(--pink);">🧑‍🎓</div>
                 <div style="font-weight:700; font-size:18px; color:var(--text-primary);">720+</div>
                 <div style="font-size:12px; color:var(--text-secondary);">Siswa</div>
             </div>
-            <div class="card animate-on-show is-visible" style="flex:1; min-width:120px; text-align:center; padding:16px 10px;">
+            <div class="card slide-right delay-5" style="flex:1; min-width:120px; text-align:center; padding:16px 10px;">
                 <div style="font-size:32px; color:var(--gold);">🏆</div>
                 <div style="font-weight:700; font-size:18px; color:var(--text-primary);">32</div>
                 <div style="font-size:12px; color:var(--text-secondary);">Prestasi</div>
             </div>
         </div>
 
-        <div class="card animate-on-show is-visible" style="background: rgba(167, 139, 250, 0.06); border:1px solid var(--glass-border);">
+        <!-- Kalender: dari kiri-bawah -->
+        <div class="card slide-diagonal-lb delay-6" style="background: rgba(167, 139, 250, 0.06); border:1px solid var(--glass-border);">
             <p style="font-weight:700; color:var(--text-primary); display:flex; align-items:center; gap:8px;">
                 <i class="fas fa-calendar-alt" style="color:var(--ungu);"></i>
                 Kalender Akademik 2026/2027
             </p>
             <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:8px;">
-                <span class="chip chip-ungu"><i class="far fa-calendar-check"></i> 15 Jul · Awal Masuk</span>
-                <span class="chip chip-pink"><i class="far fa-calendar-check"></i> 17 Agt · HUT RI</span>
-                <span class="chip chip-gold"><i class="far fa-calendar-check"></i> 20-24 Des · Libur</span>
+                <span class="chip chip-ungu slide-left delay-7"><i class="far fa-calendar-check"></i> 15 Jul · Awal Masuk</span>
+                <span class="chip chip-pink slide-top delay-8"><i class="far fa-calendar-check"></i> 17 Agt · HUT RI</span>
+                <span class="chip chip-gold slide-right delay-9"><i class="far fa-calendar-check"></i> 20-24 Des · Libur</span>
             </div>
         </div>
 
-        <div class="footer-note animate-on-show is-visible">
+        <div class="footer-note slide-bottom delay-10">
             <i class="fas fa-arrow-up"></i> Geser untuk jelajahi
         </div>
     </div>
 
     <!-- ===================== HALAMAN 2 : TENTANG ===================== -->
     <div id="page-tentang" class="page">
-        <div class="page-header animate-on-show">
+        <div class="page-header slide-top delay-1">
             <div class="icon-circle"><i class="fas fa-building-columns"></i></div>
             <h2>Tentang Sekolah</h2>
             <span class="badge-year">2026/2027</span>
         </div>
 
-        <div class="card animate-on-show">
+        <div class="card slide-left delay-2">
             <h4 style="color:var(--ungu); font-size:18px; margin-bottom:6px;"><i class="fas fa-flag"></i> Visi</h4>
             <p style="font-weight:600; color:var(--text-secondary);">"Menjadi SMK unggul yang mencetak lulusan berkarakter, berdaya saing global, dan berwawasan lingkungan."</p>
             <div style="margin:14px 0 8px; height:2px; background:linear-gradient(90deg,var(--ungu),var(--pink),var(--gold));"></div>
@@ -898,12 +964,12 @@
             </ul>
         </div>
 
-        <div class="card animate-on-show" style="background: rgba(167, 139, 250, 0.06);">
+        <div class="card slide-right delay-3" style="background: rgba(167, 139, 250, 0.06);">
             <div style="display:flex; gap:12px; flex-wrap:wrap;">
-                <span class="chip chip-ungu"><i class="fas fa-school"></i> Akreditasi A</span>
-                <span class="chip chip-pink"><i class="fas fa-calendar"></i> Berdiri 1998</span>
-                <span class="chip chip-gold"><i class="fas fa-map-pin"></i> Petarukan</span>
-                <span class="chip chip-hijau"><i class="fas fa-globe"></i> Kurikulum Merdeka</span>
+                <span class="chip chip-ungu slide-left delay-4"><i class="fas fa-school"></i> Akreditasi A</span>
+                <span class="chip chip-pink slide-top delay-5"><i class="fas fa-calendar"></i> Berdiri 1998</span>
+                <span class="chip chip-gold slide-right delay-6"><i class="fas fa-map-pin"></i> Petarukan</span>
+                <span class="chip chip-hijau slide-bottom delay-7"><i class="fas fa-globe"></i> Kurikulum Merdeka</span>
             </div>
             <p style="margin-top:14px; font-size:14px; color:var(--text-secondary); line-height:1.7;">
                 <i class="fas fa-quote-left" style="color:var(--ungu); opacity:0.4; margin-right:4px;"></i>
@@ -912,51 +978,52 @@
                 penguatan karakter.
             </p>
         </div>
-        <div class="footer-note animate-on-show">
+        <div class="footer-note slide-bottom delay-8">
             <i class="fas fa-heart" style="color:var(--pink);"></i> 27 tahun menginspirasi
         </div>
     </div>
 
     <!-- ===================== HALAMAN 3 : PROGRAM ===================== -->
     <div id="page-program" class="page">
-        <div class="page-header animate-on-show">
+        <div class="page-header slide-top delay-1">
             <div class="icon-circle"><i class="fas fa-laptop-code"></i></div>
             <h2>Program Keahlian</h2>
             <span class="badge-year">2026/2027</span>
         </div>
 
         <div class="grid-dua">
-            <div class="item-keahlian animate-on-show" data-target-page="page-fasilitas">
+            <!-- Setiap kartu jurusan diberi arah dan delay berbeda -->
+            <div class="item-keahlian slide-left delay-2" data-target-page="page-fasilitas">
                 <span class="icon-big">💻</span>
                 <h4>RPL</h4>
                 <p>Rekayasa Perangkat Lunak</p>
                 <div class="link-hint"><i class="fas fa-arrow-right"></i> Lihat Fasilitas</div>
             </div>
-            <div class="item-keahlian animate-on-show" data-target-page="page-galeri">
+            <div class="item-keahlian slide-right delay-3" data-target-page="page-galeri">
                 <span class="icon-big">📡</span>
                 <h4>TKJ</h4>
                 <p>Teknik Komputer & Jaringan</p>
                 <div class="link-hint"><i class="fas fa-arrow-right"></i> Lihat Galeri</div>
             </div>
-            <div class="item-keahlian animate-on-show" data-target-page="page-kontak">
+            <div class="item-keahlian slide-left delay-4" data-target-page="page-kontak">
                 <span class="icon-big">🎨</span>
                 <h4>DKV</h4>
                 <p>Desain Komunikasi Visual</p>
                 <div class="link-hint"><i class="fas fa-arrow-right"></i> Hubungi Kami</div>
             </div>
-            <div class="item-keahlian animate-on-show" data-target-page="page-tentang">
+            <div class="item-keahlian slide-right delay-5" data-target-page="page-tentang">
                 <span class="icon-big">⚡</span>
                 <h4>TITL</h4>
                 <p>Teknik Instalasi Tenaga Listrik</p>
                 <div class="link-hint"><i class="fas fa-arrow-right"></i> Tentang Sekolah</div>
             </div>
-            <div class="item-keahlian animate-on-show" data-target-page="page-beranda">
+            <div class="item-keahlian slide-left delay-6" data-target-page="page-beranda">
                 <span class="icon-big">🧑‍🍳</span>
                 <h4>Tata Boga</h4>
                 <p>Pengolahan & Kuliner</p>
                 <div class="link-hint"><i class="fas fa-arrow-right"></i> Ke Beranda</div>
             </div>
-            <div class="item-keahlian animate-on-show" data-target-page="page-fasilitas">
+            <div class="item-keahlian slide-right delay-7" data-target-page="page-fasilitas">
                 <span class="icon-big">🛠️</span>
                 <h4>Mesin</h4>
                 <p>Teknik Pemesinan</p>
@@ -964,60 +1031,61 @@
             </div>
         </div>
 
-        <div class="card animate-on-show" style="margin-top:6px;">
+        <div class="card slide-bottom delay-8" style="margin-top:6px;">
             <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
-                <span class="chip chip-ungu"><i class="fas fa-user-graduate"></i> 6 Jurusan</span>
-                <span class="chip chip-pink"><i class="fas fa-chalkboard-user"></i> Guru kompeten</span>
-                <span class="chip chip-gold"><i class="fas fa-industry"></i> Link & Match</span>
+                <span class="chip chip-ungu slide-left delay-9"><i class="fas fa-user-graduate"></i> 6 Jurusan</span>
+                <span class="chip chip-pink slide-top delay-10"><i class="fas fa-chalkboard-user"></i> Guru kompeten</span>
+                <span class="chip chip-gold slide-right delay-11"><i class="fas fa-industry"></i> Link & Match</span>
             </div>
             <p style="margin-top:12px; font-size:13px; color:var(--text-secondary);">
                 <i class="fas fa-check-circle" style="color:var(--hijau);"></i> Semua program terakreditasi dan
                 berkolaborasi dengan industri mitra.
             </p>
         </div>
-        <div class="footer-note animate-on-show">
+        <div class="footer-note slide-bottom delay-12">
             <i class="fas fa-arrow-right"></i> Klik kartu jurusan untuk menjelajah
         </div>
     </div>
 
     <!-- ===================== HALAMAN 4 : FASILITAS ===================== -->
     <div id="page-fasilitas" class="page">
-        <div class="page-header animate-on-show">
+        <div class="page-header slide-top delay-1">
             <div class="icon-circle"><i class="fas fa-cubes"></i></div>
             <h2>Fasilitas</h2>
             <span class="badge-year">2026/2027</span>
         </div>
 
-        <div class="card animate-on-show" style="background: rgba(167, 139, 250, 0.06);">
+        <div class="card slide-bottom delay-2" style="background: rgba(167, 139, 250, 0.06);">
             <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
-                <div style="background:var(--card-bg); backdrop-filter:blur(4px); border-radius:18px; padding:14px; text-align:center; box-shadow:0 4px 12px rgba(0,0,0,0.2); border:1px solid var(--glass-border);">
+                <!-- Setiap item fasilitas muncul dari arah berbeda -->
+                <div class="slide-left delay-3" style="background:var(--card-bg); backdrop-filter:blur(4px); border-radius:18px; padding:14px; text-align:center; box-shadow:0 4px 12px rgba(0,0,0,0.2); border:1px solid var(--glass-border);">
                     <div style="font-size:28px; color:var(--ungu);">🏫</div>
                     <div style="font-weight:700; font-size:14px; color:var(--text-primary);">Lab. Komputer</div>
                 </div>
-                <div style="background:var(--card-bg); backdrop-filter:blur(4px); border-radius:18px; padding:14px; text-align:center; box-shadow:0 4px 12px rgba(0,0,0,0.2); border:1px solid var(--glass-border);">
+                <div class="slide-right delay-4" style="background:var(--card-bg); backdrop-filter:blur(4px); border-radius:18px; padding:14px; text-align:center; box-shadow:0 4px 12px rgba(0,0,0,0.2); border:1px solid var(--glass-border);">
                     <div style="font-size:28px; color:var(--pink);">📚</div>
                     <div style="font-weight:700; font-size:14px; color:var(--text-primary);">Perpustakaan</div>
                 </div>
-                <div style="background:var(--card-bg); backdrop-filter:blur(4px); border-radius:18px; padding:14px; text-align:center; box-shadow:0 4px 12px rgba(0,0,0,0.2); border:1px solid var(--glass-border);">
+                <div class="slide-left delay-5" style="background:var(--card-bg); backdrop-filter:blur(4px); border-radius:18px; padding:14px; text-align:center; box-shadow:0 4px 12px rgba(0,0,0,0.2); border:1px solid var(--glass-border);">
                     <div style="font-size:28px; color:var(--gold);">⚽</div>
                     <div style="font-weight:700; font-size:14px; color:var(--text-primary);">Lapangan Olahraga</div>
                 </div>
-                <div style="background:var(--card-bg); backdrop-filter:blur(4px); border-radius:18px; padding:14px; text-align:center; box-shadow:0 4px 12px rgba(0,0,0,0.2); border:1px solid var(--glass-border);">
+                <div class="slide-right delay-6" style="background:var(--card-bg); backdrop-filter:blur(4px); border-radius:18px; padding:14px; text-align:center; box-shadow:0 4px 12px rgba(0,0,0,0.2); border:1px solid var(--glass-border);">
                     <div style="font-size:28px; color:var(--hijau);">🧪</div>
                     <div style="font-weight:700; font-size:14px; color:var(--text-primary);">Lab. Sains</div>
                 </div>
-                <div style="background:var(--card-bg); backdrop-filter:blur(4px); border-radius:18px; padding:14px; text-align:center; box-shadow:0 4px 12px rgba(0,0,0,0.2); border:1px solid var(--glass-border);">
+                <div class="slide-left delay-7" style="background:var(--card-bg); backdrop-filter:blur(4px); border-radius:18px; padding:14px; text-align:center; box-shadow:0 4px 12px rgba(0,0,0,0.2); border:1px solid var(--glass-border);">
                     <div style="font-size:28px; color:var(--biru);">🎵</div>
                     <div style="font-weight:700; font-size:14px; color:var(--text-primary);">Ruang Musik</div>
                 </div>
-                <div style="background:var(--card-bg); backdrop-filter:blur(4px); border-radius:18px; padding:14px; text-align:center; box-shadow:0 4px 12px rgba(0,0,0,0.2); border:1px solid var(--glass-border);">
+                <div class="slide-right delay-8" style="background:var(--card-bg); backdrop-filter:blur(4px); border-radius:18px; padding:14px; text-align:center; box-shadow:0 4px 12px rgba(0,0,0,0.2); border:1px solid var(--glass-border);">
                     <div style="font-size:28px; color:var(--orange);">🖼️</div>
                     <div style="font-weight:700; font-size:14px; color:var(--text-primary);">Galeri Seni</div>
                 </div>
             </div>
         </div>
 
-        <div class="card animate-on-show" style="border-left:6px solid var(--gold); border-right:6px solid var(--pink);">
+        <div class="card slide-diagonal-lb delay-9" style="border-left:6px solid var(--gold); border-right:6px solid var(--pink);">
             <p style="font-weight:600; color:var(--text-primary); display:flex; align-items:center; gap:10px;">
                 <i class="fas fa-wifi" style="color:var(--ungu);"></i> Wi-Fi kampus & ruang ber-AC
             </p>
@@ -1025,77 +1093,78 @@
                 Fasilitas modern untuk mendukung pembelajaran abad 21.
             </p>
         </div>
-        <div class="footer-note animate-on-show">
+        <div class="footer-note slide-bottom delay-10">
             <i class="fas fa-check"></i> Sarana lengkap & nyaman
         </div>
     </div>
 
     <!-- ===================== HALAMAN 5 : GALERI (Instagram Style) ===================== -->
     <div id="page-galeri" class="page">
-        <div class="page-header animate-on-show">
+        <div class="page-header slide-top delay-1">
             <div class="icon-circle"><i class="fas fa-images"></i></div>
             <h2>Galeri</h2>
             <span class="badge-year">2026/2027</span>
         </div>
 
-        <div class="galeri-grid animate-on-show">
-            <div class="galeri-item">
+        <div class="galeri-grid">
+            <!-- Setiap galeri-item muncul dengan arah dan delay bervariasi -->
+            <div class="galeri-item slide-left delay-2">
                 <span>📸</span>
                 <div class="overlay-ig">
                     <span><i class="fas fa-heart"></i> 124</span>
                     <span><i class="fas fa-comment"></i> 18</span>
                 </div>
             </div>
-            <div class="galeri-item">
+            <div class="galeri-item slide-top delay-3">
                 <span>🎓</span>
                 <div class="overlay-ig">
                     <span><i class="fas fa-heart"></i> 89</span>
                     <span><i class="fas fa-comment"></i> 7</span>
                 </div>
             </div>
-            <div class="galeri-item">
+            <div class="galeri-item slide-right delay-4">
                 <span>🏅</span>
                 <div class="overlay-ig">
                     <span><i class="fas fa-heart"></i> 203</span>
                     <span><i class="fas fa-comment"></i> 24</span>
                 </div>
             </div>
-            <div class="galeri-item">
+            <div class="galeri-item slide-left delay-5">
                 <span>🎭</span>
                 <div class="overlay-ig">
                     <span><i class="fas fa-heart"></i> 67</span>
                     <span><i class="fas fa-comment"></i> 5</span>
                 </div>
             </div>
-            <div class="galeri-item">
+            <div class="galeri-item slide-bottom delay-6">
                 <span>🌿</span>
                 <div class="overlay-ig">
                     <span><i class="fas fa-heart"></i> 156</span>
                     <span><i class="fas fa-comment"></i> 13</span>
                 </div>
             </div>
-            <div class="galeri-item">
+            <div class="galeri-item slide-right delay-7">
                 <span>🤝</span>
                 <div class="overlay-ig">
                     <span><i class="fas fa-heart"></i> 92</span>
                     <span><i class="fas fa-comment"></i> 9</span>
                 </div>
             </div>
-            <div class="galeri-item">
+            <div class="galeri-item slide-diagonal-lb delay-8">
                 <span>🎨</span>
                 <div class="overlay-ig">
                     <span><i class="fas fa-heart"></i> 178</span>
                     <span><i class="fas fa-comment"></i> 21</span>
                 </div>
             </div>
-            <div class="galeri-item">
+            <div class="galeri-item slide-diagonal-rt delay-9">
                 <span>⚡</span>
                 <div class="overlay-ig">
                     <span><i class="fas fa-heart"></i> 134</span>
                     <span><i class="fas fa-comment"></i> 11</span>
                 </div>
             </div>
-            <div class="galeri-item">
+            <div class="galeri-item slide-left delay-10">
                 <span>💻</span>
                 <div class="overlay-ig">
                     <span><i class="fas fa-heart"></i> 210</span>
@@ -1104,7 +1173,7 @@
             </div>
         </div>
 
-        <div class="card animate-on-show" style="text-align:center; background: rgba(167, 139, 250, 0.06); margin-top:16px;">
+        <div class="card slide-bottom delay-11" style="text-align:center; background: rgba(167, 139, 250, 0.06); margin-top:16px;">
             <p style="font-weight:700; color:var(--text-primary); display:flex; align-items:center; justify-content:center; gap:8px; flex-wrap:wrap;">
                 <i class="fas fa-camera" style="color:var(--ungu);"></i>
                 <span>#SMKSatyaPraja2</span>
@@ -1112,58 +1181,58 @@
                 <span>#TA2026/2027</span>
             </p>
             <div style="display:flex; gap:8px; justify-content:center; margin-top:8px; flex-wrap:wrap;">
-                <span class="chip chip-ungu">#KelasKreatif</span>
-                <span class="chip chip-pink">#ProjectBased</span>
-                <span class="chip chip-gold">#Prestasi</span>
-                <span class="chip chip-hijau">#SekolahHebat</span>
+                <span class="chip chip-ungu slide-left delay-12">#KelasKreatif</span>
+                <span class="chip chip-pink slide-top delay-13">#ProjectBased</span>
+                <span class="chip chip-gold slide-right delay-14">#Prestasi</span>
+                <span class="chip chip-hijau slide-bottom delay-15">#SekolahHebat</span>
             </div>
         </div>
 
-        <div class="footer-note animate-on-show">
+        <div class="footer-note slide-bottom delay-16">
             <i class="fas fa-instagram" style="color:#e4405f;"></i> Follow @smksatya2_petarukan
         </div>
     </div>
 
     <!-- ===================== HALAMAN 6 : KONTAK ===================== -->
     <div id="page-kontak" class="page">
-        <div class="page-header animate-on-show">
+        <div class="page-header slide-top delay-1">
             <div class="icon-circle"><i class="fas fa-phone"></i></div>
             <h2>Kontak</h2>
             <span class="badge-year">2026/2027</span>
         </div>
 
         <div class="kontak-list">
-            <div class="kontak-item animate-on-show">
+            <div class="kontak-item slide-left delay-2">
                 <div class="icon-box ungu"><i class="fas fa-map-pin"></i></div>
                 <div class="info"><div class="label">Alamat</div><div class="value">Jl. Raya Petarukan No. 45, Pemalang</div></div>
             </div>
-            <div class="kontak-item animate-on-show">
+            <div class="kontak-item slide-right delay-3">
                 <div class="icon-box pink"><i class="fas fa-phone-alt"></i></div>
                 <div class="info"><div class="label">Telepon</div><div class="value">(0284) 1234567</div></div>
             </div>
-            <div class="kontak-item animate-on-show">
+            <div class="kontak-item slide-left delay-4">
                 <div class="icon-box gold"><i class="fas fa-envelope"></i></div>
                 <div class="info"><div class="label">Email</div><div class="value">info@smksatya2.sch.id</div></div>
             </div>
-            <div class="kontak-item animate-on-show">
+            <div class="kontak-item slide-right delay-5">
                 <div class="icon-box hijau"><i class="fab fa-instagram"></i></div>
                 <div class="info"><div class="label">Instagram</div><div class="value">@smksatya2_petarukan</div></div>
             </div>
-            <div class="kontak-item animate-on-show">
+            <div class="kontak-item slide-left delay-6">
                 <div class="icon-box biru"><i class="fab fa-youtube"></i></div>
                 <div class="info"><div class="label">YouTube</div><div class="value">SMK Satya Praja 2 Official</div></div>
             </div>
         </div>
 
-        <div class="card animate-on-show" style="text-align:center; background: rgba(167, 139, 250, 0.06);">
+        <div class="card slide-bottom delay-7" style="text-align:center; background: rgba(167, 139, 250, 0.06);">
             <p style="font-weight:700; color:var(--text-primary);">
                 <i class="fas fa-paper-plane" style="color:var(--pink);"></i> Siap membantu Anda!
             </p>
-            <button class="btn-cta" style="margin-top:10px; font-size:14px; padding:10px 28px;">
+            <button class="btn-cta slide-diagonal-lb delay-8" style="margin-top:10px; font-size:14px; padding:10px 28px;">
                 <i class="fas fa-comment"></i> Hubungi Kami
             </button>
         </div>
-        <div class="footer-note animate-on-show">
+        <div class="footer-note slide-bottom delay-9">
             <i class="fas fa-heart" style="color:var(--pink);"></i> Terima kasih kunjungannya
         </div>
     </div>
@@ -1217,14 +1286,14 @@
                     }
                 });
 
-                // Animasi komponen bertahap dengan jeda lebih halus
-                const items = target.querySelectorAll('.animate-on-show');
-                items.forEach((el, index) => {
-                    el.classList.remove('is-visible');
-                    const delay = 80 + (index * 60);
-                    setTimeout(() => {
-                        el.classList.add('is-visible');
-                    }, delay);
+                // Reset animasi pada elemen di halaman target dengan menghapus dan menambahkan ulang class animasi
+                // Karena kita menggunakan keyframes, cukup dengan menambahkan class active, animasi akan berjalan otomatis
+                // Untuk memastikan animasi diputar ulang, kita bisa trigger reflow
+                const animElements = target.querySelectorAll('[class*="slide-"]');
+                animElements.forEach(el => {
+                    el.style.animation = 'none';
+                    el.offsetHeight; // trigger reflow
+                    el.style.animation = '';
                 });
 
                 window.scrollTo({ top: 0, behavior: 'smooth' });
